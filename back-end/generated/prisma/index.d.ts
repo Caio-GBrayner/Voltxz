@@ -11053,7 +11053,7 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<"User"> | string
+    id?: UuidFilter<"User"> | string
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
@@ -11111,7 +11111,7 @@ export namespace Prisma {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"User"> | string
+    id?: UuidWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
@@ -11124,7 +11124,7 @@ export namespace Prisma {
     AND?: LandOwnersWhereInput | LandOwnersWhereInput[]
     OR?: LandOwnersWhereInput[]
     NOT?: LandOwnersWhereInput | LandOwnersWhereInput[]
-    id?: StringFilter<"LandOwners"> | string
+    id?: UuidFilter<"LandOwners"> | string
     user_id?: UuidFilter<"LandOwners"> | string
     document_id?: StringFilter<"LandOwners"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -11163,7 +11163,7 @@ export namespace Prisma {
     AND?: LandOwnersScalarWhereWithAggregatesInput | LandOwnersScalarWhereWithAggregatesInput[]
     OR?: LandOwnersScalarWhereWithAggregatesInput[]
     NOT?: LandOwnersScalarWhereWithAggregatesInput | LandOwnersScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"LandOwners"> | string
+    id?: UuidWithAggregatesFilter<"LandOwners"> | string
     user_id?: UuidWithAggregatesFilter<"LandOwners"> | string
     document_id?: StringWithAggregatesFilter<"LandOwners"> | string
   }
@@ -11172,7 +11172,7 @@ export namespace Prisma {
     AND?: CompaniesWhereInput | CompaniesWhereInput[]
     OR?: CompaniesWhereInput[]
     NOT?: CompaniesWhereInput | CompaniesWhereInput[]
-    id?: StringFilter<"Companies"> | string
+    id?: UuidFilter<"Companies"> | string
     user_id?: UuidFilter<"Companies"> | string
     document_id?: StringFilter<"Companies"> | string
     company_name?: StringFilter<"Companies"> | string
@@ -11215,7 +11215,7 @@ export namespace Prisma {
     AND?: CompaniesScalarWhereWithAggregatesInput | CompaniesScalarWhereWithAggregatesInput[]
     OR?: CompaniesScalarWhereWithAggregatesInput[]
     NOT?: CompaniesScalarWhereWithAggregatesInput | CompaniesScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Companies"> | string
+    id?: UuidWithAggregatesFilter<"Companies"> | string
     user_id?: UuidWithAggregatesFilter<"Companies"> | string
     document_id?: StringWithAggregatesFilter<"Companies"> | string
     company_name?: StringWithAggregatesFilter<"Companies"> | string
@@ -11225,7 +11225,7 @@ export namespace Prisma {
     AND?: InvestorsWhereInput | InvestorsWhereInput[]
     OR?: InvestorsWhereInput[]
     NOT?: InvestorsWhereInput | InvestorsWhereInput[]
-    id?: StringFilter<"Investors"> | string
+    id?: UuidFilter<"Investors"> | string
     user_id?: UuidFilter<"Investors"> | string
     document_id?: StringFilter<"Investors"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -11264,7 +11264,7 @@ export namespace Prisma {
     AND?: InvestorsScalarWhereWithAggregatesInput | InvestorsScalarWhereWithAggregatesInput[]
     OR?: InvestorsScalarWhereWithAggregatesInput[]
     NOT?: InvestorsScalarWhereWithAggregatesInput | InvestorsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Investors"> | string
+    id?: UuidWithAggregatesFilter<"Investors"> | string
     user_id?: UuidWithAggregatesFilter<"Investors"> | string
     document_id?: StringWithAggregatesFilter<"Investors"> | string
   }
@@ -11273,7 +11273,7 @@ export namespace Prisma {
     AND?: LandsWhereInput | LandsWhereInput[]
     OR?: LandsWhereInput[]
     NOT?: LandsWhereInput | LandsWhereInput[]
-    id?: StringFilter<"Lands"> | string
+    id?: UuidFilter<"Lands"> | string
     owner_id?: UuidFilter<"Lands"> | string
     price?: DecimalFilter<"Lands"> | Decimal | DecimalJsLike | number | string
     availability?: BoolFilter<"Lands"> | boolean
@@ -11361,7 +11361,7 @@ export namespace Prisma {
     AND?: LandsScalarWhereWithAggregatesInput | LandsScalarWhereWithAggregatesInput[]
     OR?: LandsScalarWhereWithAggregatesInput[]
     NOT?: LandsScalarWhereWithAggregatesInput | LandsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Lands"> | string
+    id?: UuidWithAggregatesFilter<"Lands"> | string
     owner_id?: UuidWithAggregatesFilter<"Lands"> | string
     price?: DecimalWithAggregatesFilter<"Lands"> | Decimal | DecimalJsLike | number | string
     availability?: BoolWithAggregatesFilter<"Lands"> | boolean
@@ -11381,7 +11381,7 @@ export namespace Prisma {
     AND?: InvestmentsWhereInput | InvestmentsWhereInput[]
     OR?: InvestmentsWhereInput[]
     NOT?: InvestmentsWhereInput | InvestmentsWhereInput[]
-    id?: StringFilter<"Investments"> | string
+    id?: UuidFilter<"Investments"> | string
     project_id?: UuidFilter<"Investments"> | string
     investor_id?: UuidNullableFilter<"Investments"> | string | null
     value_invested?: DecimalFilter<"Investments"> | Decimal | DecimalJsLike | number | string
@@ -11450,7 +11450,7 @@ export namespace Prisma {
     AND?: InvestmentsScalarWhereWithAggregatesInput | InvestmentsScalarWhereWithAggregatesInput[]
     OR?: InvestmentsScalarWhereWithAggregatesInput[]
     NOT?: InvestmentsScalarWhereWithAggregatesInput | InvestmentsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Investments"> | string
+    id?: UuidWithAggregatesFilter<"Investments"> | string
     project_id?: UuidWithAggregatesFilter<"Investments"> | string
     investor_id?: UuidNullableWithAggregatesFilter<"Investments"> | string | null
     value_invested?: DecimalWithAggregatesFilter<"Investments"> | Decimal | DecimalJsLike | number | string
@@ -11466,7 +11466,7 @@ export namespace Prisma {
     AND?: ProjectsWhereInput | ProjectsWhereInput[]
     OR?: ProjectsWhereInput[]
     NOT?: ProjectsWhereInput | ProjectsWhereInput[]
-    id?: StringFilter<"Projects"> | string
+    id?: UuidFilter<"Projects"> | string
     land_id?: UuidFilter<"Projects"> | string
     company_id?: UuidNullableFilter<"Projects"> | string | null
     power_kw?: DecimalFilter<"Projects"> | Decimal | DecimalJsLike | number | string
@@ -11545,7 +11545,7 @@ export namespace Prisma {
     AND?: ProjectsScalarWhereWithAggregatesInput | ProjectsScalarWhereWithAggregatesInput[]
     OR?: ProjectsScalarWhereWithAggregatesInput[]
     NOT?: ProjectsScalarWhereWithAggregatesInput | ProjectsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Projects"> | string
+    id?: UuidWithAggregatesFilter<"Projects"> | string
     land_id?: UuidWithAggregatesFilter<"Projects"> | string
     company_id?: UuidNullableWithAggregatesFilter<"Projects"> | string | null
     power_kw?: DecimalWithAggregatesFilter<"Projects"> | Decimal | DecimalJsLike | number | string
@@ -11562,7 +11562,7 @@ export namespace Prisma {
     AND?: ProjectProposalWhereInput | ProjectProposalWhereInput[]
     OR?: ProjectProposalWhereInput[]
     NOT?: ProjectProposalWhereInput | ProjectProposalWhereInput[]
-    id?: StringFilter<"ProjectProposal"> | string
+    id?: UuidFilter<"ProjectProposal"> | string
     project_id?: UuidFilter<"ProjectProposal"> | string
     land_id?: UuidFilter<"ProjectProposal"> | string
     status?: EnumAgreementStatusFilter<"ProjectProposal"> | $Enums.AgreementStatus
@@ -11613,7 +11613,7 @@ export namespace Prisma {
     AND?: ProjectProposalScalarWhereWithAggregatesInput | ProjectProposalScalarWhereWithAggregatesInput[]
     OR?: ProjectProposalScalarWhereWithAggregatesInput[]
     NOT?: ProjectProposalScalarWhereWithAggregatesInput | ProjectProposalScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ProjectProposal"> | string
+    id?: UuidWithAggregatesFilter<"ProjectProposal"> | string
     project_id?: UuidWithAggregatesFilter<"ProjectProposal"> | string
     land_id?: UuidWithAggregatesFilter<"ProjectProposal"> | string
     status?: EnumAgreementStatusWithAggregatesFilter<"ProjectProposal"> | $Enums.AgreementStatus
@@ -12225,6 +12225,18 @@ export namespace Prisma {
     owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
   }
 
+  export type UuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12323,6 +12335,21 @@ export namespace Prisma {
     created_at?: SortOrder
   }
 
+  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12383,18 +12410,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type UuidFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidFilter<$PrismaModel> | string
-  }
-
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -12421,21 +12436,6 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     document_id?: SortOrder
-  }
-
-  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type ProjectsListRelationFilter = {
@@ -13400,6 +13400,17 @@ export namespace Prisma {
     update?: XOR<XOR<LandsUpdateToOneWithWhereWithoutProjectProposalInput, LandsUpdateWithoutProjectProposalInput>, LandsUncheckedUpdateWithoutProjectProposalInput>
   }
 
+  export type NestedUuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13446,6 +13457,31 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13461,17 +13497,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedEnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13524,31 +13549,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedUuidFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidFilter<$PrismaModel> | string
-  }
-
-  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
@@ -14101,7 +14101,7 @@ export namespace Prisma {
     AND?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
     OR?: ProjectsScalarWhereInput[]
     NOT?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
-    id?: StringFilter<"Projects"> | string
+    id?: UuidFilter<"Projects"> | string
     land_id?: UuidFilter<"Projects"> | string
     company_id?: UuidNullableFilter<"Projects"> | string | null
     power_kw?: DecimalFilter<"Projects"> | Decimal | DecimalJsLike | number | string
@@ -14232,7 +14232,7 @@ export namespace Prisma {
     AND?: InvestmentsScalarWhereInput | InvestmentsScalarWhereInput[]
     OR?: InvestmentsScalarWhereInput[]
     NOT?: InvestmentsScalarWhereInput | InvestmentsScalarWhereInput[]
-    id?: StringFilter<"Investments"> | string
+    id?: UuidFilter<"Investments"> | string
     project_id?: UuidFilter<"Investments"> | string
     investor_id?: UuidNullableFilter<"Investments"> | string | null
     value_invested?: DecimalFilter<"Investments"> | Decimal | DecimalJsLike | number | string

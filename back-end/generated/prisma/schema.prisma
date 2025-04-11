@@ -16,7 +16,7 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
+  id         String   @id @default(uuid()) @db.Uuid
   name       String   @db.VarChar(255)
   email      String   @unique @db.VarChar(255)
   password   String   @db.Text
@@ -32,7 +32,7 @@ model User {
 }
 
 model LandOwners {
-  id          String @id @default(uuid())
+  id          String @id @default(uuid()) @db.Uuid
   user_id     String @unique @db.Uuid
   user        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   document_id String
@@ -43,7 +43,7 @@ model LandOwners {
 }
 
 model Companies {
-  id           String @id @default(uuid())
+  id           String @id @default(uuid()) @db.Uuid
   user_id      String @unique @db.Uuid
   user         User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   document_id  String @unique @db.VarChar(20)
@@ -55,7 +55,7 @@ model Companies {
 }
 
 model Investors {
-  id          String @id @default(uuid())
+  id          String @id @default(uuid()) @db.Uuid
   user_id     String @unique @db.Uuid
   user        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   document_id String @unique @db.VarChar(20)
@@ -66,7 +66,7 @@ model Investors {
 }
 
 model Lands {
-  id           String     @id @default(uuid())
+  id           String     @id @default(uuid()) @db.Uuid
   owner_id     String     @unique @db.Uuid
   owner        LandOwners @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   price        Decimal    @db.Decimal(10, 2)
@@ -89,7 +89,7 @@ model Lands {
 }
 
 model Investments {
-  id             String           @id @default(uuid())
+  id             String           @id @default(uuid()) @db.Uuid
   project_id     String           @unique @db.Uuid
   project        Projects         @relation(fields: [project_id], references: [id], onDelete: Cascade)
   investor_id    String?          @db.Uuid
@@ -106,7 +106,7 @@ model Investments {
 }
 
 model Projects {
-  id               String             @id @default(uuid())
+  id               String             @id @default(uuid()) @db.Uuid
   land_id          String             @unique @db.Uuid
   land             Lands              @relation(fields: [land_id], references: [id], onDelete: Cascade)
   company_id       String?            @db.Uuid
@@ -127,7 +127,7 @@ model Projects {
 }
 
 model ProjectProposal {
-  id           String               @id @default(uuid())
+  id           String               @id @default(uuid()) @db.Uuid
   project_id   String               @unique @db.Uuid
   project      Projects             @relation(fields: [project_id], references: [id], onDelete: Cascade)
   land_id      String               @unique @db.Uuid
