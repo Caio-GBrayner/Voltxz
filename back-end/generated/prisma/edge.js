@@ -271,11 +271,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://dev:123456@localhost:5432/voltzx?schema=public"
+        "value": null
       }
     }
   },
