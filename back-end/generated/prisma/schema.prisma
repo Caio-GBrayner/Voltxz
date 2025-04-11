@@ -1,0 +1,176 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider    = "prisma-client-js"
+  output      = "../generated/prisma"
+  nativeTypes = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String   @db.VarChar(255)
+  email      String   @unique @db.VarChar(255)
+  password   String   @db.Text
+  user_type  UserType
+  phone      String?  @db.VarChar(20)
+  created_at DateTime @default(now()) @map("created_at")
+
+  landOwner LandOwners?
+  company   Companies?
+  investor  Investors?
+
+  @@map("users")
+}
+
+model LandOwners {
+  id          String @id @default(uuid())
+  user_id     String @unique @db.Uuid
+  user        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  document_id String
+
+  Lands Lands?
+
+  @@map("land_owners")
+}
+
+model Companies {
+  id           String @id @default(uuid())
+  user_id      String @unique @db.Uuid
+  user         User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  document_id  String @unique @db.VarChar(20)
+  company_name String @db.VarChar(255)
+
+  Projects Projects[]
+
+  @@map("companies")
+}
+
+model Investors {
+  id          String @id @default(uuid())
+  user_id     String @unique @db.Uuid
+  user        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  document_id String @unique @db.VarChar(20)
+
+  Investments Investments[]
+
+  @@map("investors")
+}
+
+model Lands {
+  id           String     @id @default(uuid())
+  owner_id     String     @unique @db.Uuid
+  owner        LandOwners @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  price        Decimal    @db.Decimal(10, 2)
+  availability Boolean    @default(true)
+  street       String     @db.VarChar(255)
+  number       String     @db.VarChar(255)
+  complement   String?    @db.VarChar(255)
+  district     String?    @db.VarChar(255)
+  city         String     @db.VarChar(255)
+  state        String     @db.VarChar(255)
+  postal_code  String     @map("postal_code") @db.VarChar(255)
+  country      String     @db.VarChar(255)
+  created_at   DateTime   @default(now()) @map("created_at")
+  updated_at   DateTime   @updatedAt @map("updated_at")
+
+  Projects        Projects?
+  ProjectProposal ProjectProposal?
+
+  @@map("lands")
+}
+
+model Investments {
+  id             String           @id @default(uuid())
+  project_id     String           @unique @db.Uuid
+  project        Projects         @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  investor_id    String?          @db.Uuid
+  investor       Investors?       @relation(fields: [investor_id], references: [id], onDelete: SetNull)
+  value_invested Decimal          @db.Decimal(15, 2)
+  invested_date  DateTime         @default(now()) @map("invested_date")
+  owner_agree    Agreement        @default(pending)
+  company_agree  Agreement        @default(pending)
+  title          String?          @db.VarChar(255)
+  description    String?
+  status         InvestmentStatus @default(pending)
+
+  @@map("investments")
+}
+
+model Projects {
+  id               String             @id @default(uuid())
+  land_id          String             @unique @db.Uuid
+  land             Lands              @relation(fields: [land_id], references: [id], onDelete: Cascade)
+  company_id       String?            @db.Uuid
+  company          Companies?         @relation(fields: [company_id], references: [id], onDelete: SetNull)
+  power_kw         Decimal            @db.Decimal(10, 2)
+  cost             Decimal            @db.Decimal(15, 2)
+  estimated_return Decimal            @db.Decimal(15, 2)
+  status           SolarProjectStatus @default(pendingApproval)
+  created_at       DateTime           @default(now()) @map("created_at")
+  title            String             @db.VarChar(255)
+  description      String?
+  area             Decimal            @db.Decimal(10, 2)
+
+  Investments     Investments?
+  ProjectProposal ProjectProposal?
+
+  @@map("projects")
+}
+
+model ProjectProposal {
+  id           String               @id @default(uuid())
+  project_id   String               @unique @db.Uuid
+  project      Projects             @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  land_id      String               @unique @db.Uuid
+  land         Lands                @relation(fields: [land_id], references: [id], onDelete: Cascade)
+  status       AgreementStatus      @default(pending)
+  created_at   DateTime             @default(now()) @map("created_at")
+  owner_agreed OwnerAgreementStatus @default(pending)
+
+  @@map("project_proposal")
+}
+
+enum AgreementStatus {
+  pending
+  accepted
+  rejected
+}
+
+enum OwnerAgreementStatus {
+  pending
+  accepted
+  rejected
+}
+
+enum SolarProjectStatus {
+  pendingApproval @map("pending_approval")
+  active          @map("active")
+  completed       @map("completed")
+}
+
+enum Agreement {
+  pending
+  accepted
+  rejected
+}
+
+enum InvestmentStatus {
+  pending
+  accepted
+  rejected
+}
+
+enum UserType {
+  land_owner
+  investor
+  company
+}
