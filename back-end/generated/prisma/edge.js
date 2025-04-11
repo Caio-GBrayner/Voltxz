@@ -242,7 +242,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/mnt/c/temp/Porto-Voltzx/back-end/generated/prisma",
+      "value": "C:\\Users\\assis\\Voltxz\\back-end\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -252,17 +252,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/mnt/c/temp/Porto-Voltzx/back-end/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\assis\\Voltxz\\back-end\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
