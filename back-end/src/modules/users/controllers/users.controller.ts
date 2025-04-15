@@ -31,10 +31,8 @@ export class UserController {
   }
 
   @Get(':id')
-  async getUserById(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<UserModel | null> {
-    return this.userService.user({ id});
+  async getUserById(@Param('id') id: string): Promise<UserModel | null> {
+    return this.userService.user({ id });
   }
 
   @Get()
@@ -54,13 +52,13 @@ export class UserController {
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserModel> {
     return this.userService.updateUser({
-      where: { id },
+      where: { id: id.toString() },
       data: updateUserDto,
     });
   }
 
   @Delete(':id')
   async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<UserModel> {
-    return this.userService.deleteUser({ id });
+    return this.userService.deleteUser({ id.toString() });
   }
 }

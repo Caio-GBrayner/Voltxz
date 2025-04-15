@@ -1,8 +1,21 @@
+import { UserType } from '@prisma/client';
+import { IsEnum, IsOptional } from 'class-validator';
+
 export class UpdateUserDto {
+  @IsOptional()
   name?: string;
+
+  @IsOptional()
+  @IsEmail()
   email?: string;
+
+  @IsOptional()
   password?: string;
+
+  @IsOptional()
   phone?: string | null;
-  created_at?: Date;
-  user_type?: string;
+
+  @IsOptional()
+  @IsEnum(UserType)
+  user_type?: UserType; 
 }
