@@ -12,7 +12,7 @@ import {
 import { UserService } from 'src/modules/users/services/users.service';
 import { User as UserModel } from 'generated/prisma';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto'; // Criar este DTO também
+import { UpdateUserDto } from '../dto/update-user.dto'; 
 
 @Controller('api/users')
 export class UserController {
@@ -48,7 +48,7 @@ export class UserController {
 
   @Put(':id')
   async updateUser(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,  
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserModel> {
     return this.userService.updateUser({
