@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RegisterDto } from 'src/auth/dto/register.dto';
-
+import { UserType } from 'generated/prisma';
 
 @Injectable()
 export class AuthService {
@@ -26,18 +26,19 @@ export class AuthService {
     const user = await this.prisma.user.create({
       data: {
         ...registerDto,
+        name: registerDto.name ?? 'Default Name',
         password: hashedPassword,
       },
     });
 
-    if (registerDto.user_type === 'LAND_OWNER') {
+    if (registerDto.user_type === UserType.land_owner) {
       await this.prisma.landOwners.create({
         data: {
           user_id: user.id,
-          document_id: 'DOC-123', //substituir depois
+          document_id: 'DOC-123',
         },
       });
-    }
+    }}
 
     return {
       access_token: this.jwtService.sign({ sub: user.id, email: user.email }),

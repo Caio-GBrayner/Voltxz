@@ -48,6 +48,7 @@
 
 1. Connect with Caio Brayner [LinkedIn](https://www.linkedin.com/in/caiogomesbrayner).
 2. Connect with Francisco Primo [LinkedIn](http://www.linkedin.com/in/franciscoprimo).
+3. Connect with Nicole Karoliny [LinkedIn](https://www.linkedin.com/in/nicole-karoliny-0bbb41238).
 
 ### Fork and clone the repository
 
