@@ -1,3 +1,4 @@
+import { UpdateUserDto } from '../dto/update-user.dto';
 import {
   Controller,
   Post,
@@ -12,7 +13,7 @@ import {
 import { UserService } from 'src/modules/users/services/users.service';
 import { User as UserModel } from 'generated/prisma'; 
 import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto'; 
 
 @Controller('api/users')
 export class UserController {
@@ -33,7 +34,7 @@ export class UserController {
 
   @Get(':id')
   async getUserById(
-    @Param('id') id: string, 
+    @Param('id') id: string,  
   ): Promise<UserModel | null> {
     return this.userService.user({ id }); 
   }
@@ -51,8 +52,8 @@ export class UserController {
 
   @Put(':id')
   async updateUser(
-    @Param('id') id: string, 
-    @Body() updateUserDto: UpdateUserDto, 
+    @Param('id') id: string,  
+    @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserModel> {
     return this.userService.updateUser({
       where: { id },
@@ -61,7 +62,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async deleteUser(@Param('id') id: string): Promise<UserModel> {
-    return this.userService.deleteUser({ id }); 
+  async deleteUser(@Param('id') id: string): Promise<UserModel> {  
+    return this.userService.deleteUser({ id });
   }
 }
