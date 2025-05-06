@@ -1,4 +1,3 @@
-// src/modules/users/dto/create-user.dto.ts
 import { IsString, IsOptional, IsEmail, IsEnum, IsDateString } from 'class-validator';
 import { UserType } from 'generated/prisma'; 
 export class CreateUserDto {
@@ -21,5 +20,5 @@ export class CreateUserDto {
   created_at?: Date;
 
   @IsEnum(UserType)
-  user_type!: UserType; // Usando enum gerado pelo Prisma para user_type
+  user_type!: UserType; 
 }
