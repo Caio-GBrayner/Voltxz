@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./back-end
+    container_name: voltz_backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./back-end:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?schema=public
+      NODE_ENV: development
+
+
+  frontend:
+    build: ./front-end
+    container_name: voltz_frontend
+    ports:
+      - "3001:3000" 
+    volumes:
+      - ./front-end:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:3000  
+      NEXT_PUBLIC_ANOTHER_ENV_VAR: some_value  
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:13
+    container_name: voltz_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
