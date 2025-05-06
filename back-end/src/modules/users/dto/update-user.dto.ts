@@ -1,4 +1,4 @@
-// src/modules/users/dto/update-user.dto.ts
+
 import { IsOptional, IsString, IsEnum, IsEmail, IsDateString } from 'class-validator';
 import { UserType } from 'generated/prisma';
 
