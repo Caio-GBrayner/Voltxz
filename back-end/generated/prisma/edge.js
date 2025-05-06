@@ -242,7 +242,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/mnt/c/temp/Porto-Voltzx/back-end/generated/prisma",
+      "value": "/mnt/c/temp/Voltz/Voltxz/back-end/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -257,12 +257,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/mnt/c/temp/Porto-Voltzx/back-end/prisma/schema.prisma",
+    "sourceFilePath": "/mnt/c/temp/Voltz/Voltxz/back-end/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
@@ -271,7 +270,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
