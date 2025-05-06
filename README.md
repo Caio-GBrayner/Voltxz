@@ -46,8 +46,8 @@
 
 ### Connect with us on LinkedIn
 
-Connect with Caio Brayner [LinkedIn](https://www.linkedin.com/in/caiogomesbrayner).
-Connect with Francisco Primo [LinkedIn](http://www.linkedin.com/in/franciscoprimo).
+1. Connect with Caio Brayner [LinkedIn](https://www.linkedin.com/in/caiogomesbrayner).
+2. Connect with Francisco Primo [LinkedIn](http://www.linkedin.com/in/franciscoprimo).
 
 ### Fork and clone the repository
 
