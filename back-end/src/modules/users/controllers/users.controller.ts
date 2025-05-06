@@ -1,3 +1,4 @@
+import { UpdateUserDto } from '../dto/update-user.dto';
 import {
   Controller,
   Post,
@@ -10,7 +11,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { UserService } from 'src/modules/users/services/users.service';
-import { User as UserModel } from 'generated/prisma';
+import { User as UserModel } from 'generated/prisma'; 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto'; 
 
@@ -20,30 +21,33 @@ export class UserController {
 
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto): Promise<UserModel> {
+    
     const userData = {
       ...createUserDto,
-      name: createUserDto.name ?? '',
-      phone: createUserDto.phone ?? null,
-      created_at: createUserDto.created_at ?? new Date(),
+      name: createUserDto.name ?? '', 
+      phone: createUserDto.phone ?? null, 
+      created_at: createUserDto.created_at ?? new Date(), 
     };
 
-    return this.userService.createUser(userData);
+    return this.userService.createUser(userData); 
   }
 
   @Get(':id')
-  async getUserById(@Param('id') id: string): Promise<UserModel | null> {
-    return this.userService.user({ id });
+  async getUserById(
+    @Param('id') id: string,  
+  ): Promise<UserModel | null> {
+    return this.userService.user({ id }); 
   }
 
   @Get()
   async getUsers(
-    @Query('skip', new ParseIntPipe({ optional: true })) skip?: number,
-    @Query('take', new ParseIntPipe({ optional: true })) take?: number,
+    @Query('skip', new ParseIntPipe({ optional: true })) skip?: number, 
+    @Query('take', new ParseIntPipe({ optional: true })) take?: number, 
   ): Promise<UserModel[]> {
     return this.userService.users({
       skip,
       take,
-    });
+    }); 
   }
 
   @Put(':id')
@@ -52,8 +56,8 @@ export class UserController {
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserModel> {
     return this.userService.updateUser({
-      where: { id: id.toString() },
-      data: updateUserDto,
+      where: { id },
+      data: updateUserDto, 
     });
   }
 
