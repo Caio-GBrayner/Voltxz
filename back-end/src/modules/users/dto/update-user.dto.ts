@@ -1,5 +1,10 @@
-
-import { IsOptional, IsString, IsEnum, IsEmail, IsDateString } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsEnum,
+  IsEmail,
+  IsDateString,
+} from 'class-validator';
 import { UserType } from 'generated/prisma';
 
 export class UpdateUserDto {
@@ -25,5 +30,5 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsEnum(UserType)
-  user_type?: UserType; 
+  user_type?: UserType;
 }

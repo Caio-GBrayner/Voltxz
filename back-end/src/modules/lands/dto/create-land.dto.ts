@@ -1,4 +1,10 @@
-import { IsDecimal, IsNotEmpty, IsString, IsUUID, IsOptional } from 'class-validator';
+import {
+  IsDecimal,
+  IsNotEmpty,
+  IsString,
+  IsUUID,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateLandDto {
   @IsUUID()
@@ -21,15 +27,15 @@ export class CreateLandDto {
 
   @IsString()
   @IsNotEmpty()
-  number: string;  
+  number: string;
 
   @IsString()
   @IsNotEmpty()
-  postal_code: string;  
+  postal_code: string;
 
   @IsString()
   @IsNotEmpty()
-  country: string;  
+  country: string;
 
   @IsString()
   @IsOptional()
@@ -44,7 +50,7 @@ export class CreateLandDto {
     number: string,
     postal_code: string,
     country: string,
-    complement?: string
+    complement?: string,
   ) {
     this.owner_id = owner_id;
     this.price = price;

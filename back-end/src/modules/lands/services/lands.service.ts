@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateLandDto } from 'src/modules/lands/dto/create-land.dto';
 import { UpdateLandDto } from 'src/modules/lands/dto/update-land.dto';
+
 @Injectable()
 export class LandsService {
   constructor(private prisma: PrismaService) {}

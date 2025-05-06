@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
-import { LandsService } from './lands.service';
+import { LandsService } from 'src/modules/lands/services/lands.service';
 import { CreateLandDto } from 'src/modules/lands/dto/create-land.dto';
 import { UpdateLandDto } from 'src/modules/lands/dto/update-land.dto';
 

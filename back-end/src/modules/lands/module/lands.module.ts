@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { LandsService } from './lands.service';
-import { LandsController } from './lands.controller';
-import { PrismaService } from '../../prisma/prisma.service';
+import { LandsService } from 'src/modules/lands/services/lands.service';
+import { LandsController } from 'src/modules/lands/controllers/lands.controller';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Module({
   controllers: [LandsController],
