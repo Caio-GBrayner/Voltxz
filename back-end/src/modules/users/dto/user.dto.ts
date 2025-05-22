@@ -2,27 +2,27 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsEmail()
-  email: string = ''; 
+  email: string = '';
 
   @IsString()
   @IsNotEmpty()
-  name: string = ''; 
+  name: string = '';
 
   @IsString()
   @IsOptional()
-  password?: string = ''; 
+  password?: string = '';
 }
 
 export class UpdateUserDto {
   @IsEmail()
   @IsOptional()
-  email?: string = ''; 
+  email?: string = '';
 
   @IsString()
   @IsOptional()
-  name?: string = ''; 
+  name?: string = '';
 
   @IsString()
   @IsOptional()
-  password?: string = ''; 
+  password?: string = '';
 }

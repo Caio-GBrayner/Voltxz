@@ -1,15 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common'; 
+import * as dotenv from 'dotenv';
+import { ValidationPipe } from '@nestjs/common';
+
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true })); 
-  app.enableCors(); 
-
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.enableCors();
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
-
+bootstrap().catch((err) => {
+  console.error('Falha na inicialização:', err);
+  process.exit(1);
+});

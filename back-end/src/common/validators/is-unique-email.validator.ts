@@ -1,5 +1,8 @@
-import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { PrismaService } from '../../prisma/prisma.service';
+import {
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from 'class-validator';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 
 @ValidatorConstraint({ name: 'IsUniqueEmail', async: true })
@@ -9,7 +12,7 @@ export class IsUniqueEmailValidator implements ValidatorConstraintInterface {
 
   async validate(email: string) {
     const user = await this.prisma.user.findUnique({ where: { email } });
-    return !user; 
+    return !user;
   }
 
   defaultMessage() {
