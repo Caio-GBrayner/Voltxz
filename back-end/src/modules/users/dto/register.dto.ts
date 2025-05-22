@@ -4,17 +4,17 @@ import { UserType } from '@prisma/client';
 export class RegisterDto {
   @IsString()
   @MinLength(3)
-  name: string;
+  name!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @MinLength(8)
-  password: string;
+  password!: string;
 
   @IsEnum(UserType)
-  user_type: UserType;
+  user_type!: UserType;
 
   @IsString()
   @IsOptional()

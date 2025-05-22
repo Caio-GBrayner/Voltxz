@@ -1,7 +1,10 @@
 import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
 import { LandsService } from './lands.service';
-import { CreateLandDto } from './dto/create-land.dto';
-import { UpdateLandDto } from './dto/update-land.dto';
+import { CreateLandDto } from '../users/dto/create-land.dto';
+import { UpdateLandDto } from '../users/dto/update-land.dto';
+
+ 
+  
 
 @Controller('lands')
 export class LandsController {
