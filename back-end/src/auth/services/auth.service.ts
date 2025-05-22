@@ -38,7 +38,7 @@ export class AuthService {
           document_id: 'DOC-123',
         },
       });
-    }}
+    }
 
     return {
       access_token: this.jwtService.sign({ sub: user.id, email: user.email }),
