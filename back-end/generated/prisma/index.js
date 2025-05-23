@@ -243,7 +243,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/mnt/c/temp/Voltz/Voltxz/back-end/generated/prisma",
+      "value": "/mnt/c/temp/Voltz/Nova pasta/Voltxz/back-end/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -258,11 +258,12 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/mnt/c/temp/Voltz/Voltxz/back-end/prisma/schema.prisma",
+    "sourceFilePath": "/mnt/c/temp/Voltz/Nova pasta/Voltxz/back-end/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",

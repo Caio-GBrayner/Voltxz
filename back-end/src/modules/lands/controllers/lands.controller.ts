@@ -3,7 +3,7 @@ import { LandsService } from 'src/modules/lands/services/lands.service';
 import { CreateLandDto } from 'src/modules/lands/dto/create-land.dto';
 import { UpdateLandDto } from 'src/modules/lands/dto/update-land.dto';
 
-@Controller('lands')
+@Controller('api/lands')
 export class LandsController {
   constructor(private landsService: LandsService) {}
 
