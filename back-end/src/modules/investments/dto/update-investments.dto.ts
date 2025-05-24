@@ -1,35 +1,39 @@
-import { IsDecimal, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import {
+  IsDecimal,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-import { Agreement, InvestmentStatus } from "generated/prisma";
-
+import { Agreement, InvestmentStatus } from 'generated/prisma';
 
 export class UpdateInvestmentDto {
+  @IsNotEmpty()
+  @IsDecimal()
+  value_invested!: number;
 
-    @IsNotEmpty()
-    @IsDecimal()
-    value_invested!: number;
+  @IsEnum(Agreement)
+  @IsNotEmpty()
+  @IsOptional()
+  owner_agree?: Agreement;
 
-    @IsEnum(Agreement)
-    @IsNotEmpty()
-    @IsOptional()
-    owner_agree?: Agreement;
+  @IsEnum(Agreement)
+  @IsNotEmpty()
+  @IsOptional()
+  company_agree?: Agreement;
 
-    @IsEnum(Agreement)
-    @IsNotEmpty()
-    @IsOptional()
-    company_agree?: Agreement;
+  @IsNotEmpty()
+  @IsString()
+  @IsOptional()
+  title?: string;
 
-    @IsNotEmpty()
-    @IsString()
-    @IsOptional()
-    title?: string;
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  description?: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @IsOptional()
-    description?: string;
-
-    @IsEnum(InvestmentStatus)
-    @IsNotEmpty()
-    status?: InvestmentStatus;
+  @IsEnum(InvestmentStatus)
+  @IsNotEmpty()
+  status?: InvestmentStatus;
 }

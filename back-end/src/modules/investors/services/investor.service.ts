@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
-import { CreateInvestorDto } from "src/modules/investors/dto/create-investor.dto";
-import { UpdateInvestorDto } from "src/modules/investors/dto/update-investor.dto";
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateInvestorDto } from 'src/modules/investors/dto/create-investor.dto';
+import { UpdateInvestorDto } from 'src/modules/investors/dto/update-investor.dto';
 
 @Injectable()
 export class InvestorService {
@@ -9,29 +9,29 @@ export class InvestorService {
 
   async create(createInvestorDto: CreateInvestorDto) {
     return this.prisma.investors.create({
-        data: createInvestorDto,
+      data: createInvestorDto,
     });
   }
-    async findAll() {
-        return this.prisma.investors.findMany();
-    }
+  async findAll() {
+    return this.prisma.investors.findMany();
+  }
 
-    async findOne(id: string) {
-        return this.prisma.investors.findUnique({
-            where: { id },
-        });
-    }
+  async findOne(id: string) {
+    return this.prisma.investors.findUnique({
+      where: { id },
+    });
+  }
 
-    async update(id: string, updateInvestorDto: UpdateInvestorDto) {
-        return this.prisma.investors.update({
-            where: { id },
-            data: updateInvestorDto,
-        });
-    }
+  async update(id: string, updateInvestorDto: UpdateInvestorDto) {
+    return this.prisma.investors.update({
+      where: { id },
+      data: updateInvestorDto,
+    });
+  }
 
-    async remove(id: string) {
-        return this.prisma.investors.delete({
-            where: { id },
-        });
-    }
+  async remove(id: string) {
+    return this.prisma.investors.delete({
+      where: { id },
+    });
+  }
 }
