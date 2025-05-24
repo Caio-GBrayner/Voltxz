@@ -8,7 +8,7 @@ import { LandOwnerModule } from './modules/land_owners/module/land_owner.module'
 import { CompanyModule } from './modules/companies/module/company.module';
 import { InvestmentModule } from './modules/investments/module/investment.module';
 import { InvestorModule } from './modules/investors/module/investor.module';
-import { ProjectsModule } from './projects/projects.module'; 
+import { ProjectsModule } from 'src/modules/projects/module/projects.module';
 
 @Module({
   imports: [
@@ -23,7 +23,7 @@ import { ProjectsModule } from './projects/projects.module';
     CompanyModule,
     InvestmentModule,
     InvestorModule,
-    ProjectsModule, // ✅ incluído aqui
+    ProjectsModule,
   ],
 })
 export class AppModule {}
