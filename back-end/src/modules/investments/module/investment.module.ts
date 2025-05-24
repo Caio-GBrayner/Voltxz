@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
-import { InvestorService} from "src/modules/investors/services/investor.service";
-import {InvestorController } from "src/modules/investors/controllers/investor.controller";
+import { InvestmentService} from "src/modules/investments/services/investment.service";
+import { InvestmentController } from "src/modules/investments/controllers/investment.controllers";
 import { PrismaService } from "src/prisma/prisma.service";
 
 @Module({
-  controllers: [InvestorController],
-  providers: [InvestorService, PrismaService],
+  controllers: [InvestmentController],
+  providers: [InvestmentService, PrismaService],
 })
-export class InvestorModule {}
+export class InvestmentModule {}
