@@ -5,7 +5,7 @@ import { UpdateInvestorDto } from "../dto/update-investor.dto";
 
 
 @Controller("/api/investors")
-export class InvestorsController {
+export class InvestorController {
   constructor(private readonly investorService: InvestorService) {}
 
   @Get()

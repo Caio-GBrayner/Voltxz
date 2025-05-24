@@ -7,9 +7,10 @@ import { ConfigModule } from '@nestjs/config';
 import { LandOwnerModule } from './modules/land_owners/module/land_owner.module';
 import { CompanyModule } from './modules/companies/module/company.module';
 import { InvestmentModule } from './modules/investments/module/investment.module';
+import { InvestorModule } from './modules/investors/module/investor.module';
 @Module({
   imports: [PrismaModule, UserModule, LandOwnerModule, LandsModule, AuthModule, ConfigModule.forRoot({
     isGlobal: true,
-  }), CompanyModule, InvestmentModule],
+  }), CompanyModule, InvestmentModule, InvestorModule],
 })
 export class AppModule {}
