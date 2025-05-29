@@ -1,31 +1,16 @@
-import {
-  Injectable,
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCompanyDto } from '../dto/create-company.dto';
-import { UpdateCompanyDto } from '../dto/update-company.dto';
+import { CreateCompanyDto } from 'src/modules/companies/dto/create-company.dto';
+import { UpdateCompanyDto } from 'src/modules/companies/dto/update-company.dto';
 
 @Injectable()
 export class CompanyService {
   constructor(private prisma: PrismaService) {}
 
   async create(createCompanyDto: CreateCompanyDto) {
-    try {
-      return await this.prisma.companies.create({
-        data: createCompanyDto,
-      });
-    } catch (error) {
-      if (
-        error instanceof PrismaClientKnownRequestError &&
-        error.code === 'P2002'
-      ) {
-        throw new ConflictException('Company with this name already exists');
-      }
-      throw error;
-    }
+    return this.prisma.companies.create({
+      data: createCompanyDto,
+    });
   }
 
   async findAll() {
@@ -33,22 +18,12 @@ export class CompanyService {
   }
 
   async findOne(id: string) {
-    const company = await this.prisma.companies.findUnique({
+    return this.prisma.companies.findUnique({
       where: { id },
     });
-    if (!company) {
-      throw new NotFoundException(`Company with id ${id} not found`);
-    }
-    return company;
   }
 
   async update(id: string, updateCompanyDto: UpdateCompanyDto) {
-    const company = await this.prisma.companies.findUnique({
-      where: { id },
-    });
-    if (!company) {
-      throw new NotFoundException(`Company with id ${id} not found`);
-    }
     return this.prisma.companies.update({
       where: { id },
       data: updateCompanyDto,
@@ -56,12 +31,6 @@ export class CompanyService {
   }
 
   async remove(id: string) {
-    const company = await this.prisma.companies.findUnique({
-      where: { id },
-    });
-    if (!company) {
-      throw new NotFoundException(`Company with id ${id} not found`);
-    }
     return this.prisma.companies.delete({
       where: { id },
     });
