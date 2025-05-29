@@ -5,7 +5,7 @@ import { CreateLandDto } from './create-land.dto';
 export class UpdateLandDto extends PartialType(CreateLandDto) {
   @IsDecimal({ decimal_digits: '2' })
   @IsOptional()
-  price?: number;
+  price?: string;
 
   @IsBoolean()
   @IsOptional()

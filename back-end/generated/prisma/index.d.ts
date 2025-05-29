@@ -1585,6 +1585,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type LandOwnersCountOutputType
+   */
+
+  export type LandOwnersCountOutputType = {
+    Lands: number
+  }
+
+  export type LandOwnersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Lands?: boolean | LandOwnersCountOutputTypeCountLandsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LandOwnersCountOutputType without action
+   */
+  export type LandOwnersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandOwnersCountOutputType
+     */
+    select?: LandOwnersCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LandOwnersCountOutputType without action
+   */
+  export type LandOwnersCountOutputTypeCountLandsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LandsWhereInput
+  }
+
+
+  /**
    * Count Type CompaniesCountOutputType
    */
 
@@ -1643,6 +1674,86 @@ export namespace Prisma {
    */
   export type InvestorsCountOutputTypeCountInvestmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InvestmentsWhereInput
+  }
+
+
+  /**
+   * Count Type LandsCountOutputType
+   */
+
+  export type LandsCountOutputType = {
+    Projects: number
+    ProjectProposal: number
+  }
+
+  export type LandsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Projects?: boolean | LandsCountOutputTypeCountProjectsArgs
+    ProjectProposal?: boolean | LandsCountOutputTypeCountProjectProposalArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LandsCountOutputType without action
+   */
+  export type LandsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LandsCountOutputType
+     */
+    select?: LandsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LandsCountOutputType without action
+   */
+  export type LandsCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectsWhereInput
+  }
+
+  /**
+   * LandsCountOutputType without action
+   */
+  export type LandsCountOutputTypeCountProjectProposalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectProposalWhereInput
+  }
+
+
+  /**
+   * Count Type ProjectsCountOutputType
+   */
+
+  export type ProjectsCountOutputType = {
+    Investments: number
+    ProjectProposal: number
+  }
+
+  export type ProjectsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Investments?: boolean | ProjectsCountOutputTypeCountInvestmentsArgs
+    ProjectProposal?: boolean | ProjectsCountOutputTypeCountProjectProposalArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProjectsCountOutputType without action
+   */
+  export type ProjectsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectsCountOutputType
+     */
+    select?: ProjectsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProjectsCountOutputType without action
+   */
+  export type ProjectsCountOutputTypeCountInvestmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvestmentsWhereInput
+  }
+
+  /**
+   * ProjectsCountOutputType without action
+   */
+  export type ProjectsCountOutputTypeCountProjectProposalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectProposalWhereInput
   }
 
 
@@ -2935,6 +3046,7 @@ export namespace Prisma {
     document_id?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     Lands?: boolean | LandOwners$LandsArgs<ExtArgs>
+    _count?: boolean | LandOwnersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["landOwners"]>
 
   export type LandOwnersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2961,6 +3073,7 @@ export namespace Prisma {
   export type LandOwnersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     Lands?: boolean | LandOwners$LandsArgs<ExtArgs>
+    _count?: boolean | LandOwnersCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LandOwnersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2973,7 +3086,7 @@ export namespace Prisma {
     name: "LandOwners"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      Lands: Prisma.$LandsPayload<ExtArgs> | null
+      Lands: Prisma.$LandsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3374,7 +3487,7 @@ export namespace Prisma {
   export interface Prisma__LandOwnersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Lands<T extends LandOwners$LandsArgs<ExtArgs> = {}>(args?: Subset<T, LandOwners$LandsArgs<ExtArgs>>): Prisma__LandsClient<$Result.GetResult<Prisma.$LandsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Lands<T extends LandOwners$LandsArgs<ExtArgs> = {}>(args?: Subset<T, LandOwners$LandsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3819,6 +3932,11 @@ export namespace Prisma {
      */
     include?: LandsInclude<ExtArgs> | null
     where?: LandsWhereInput
+    orderBy?: LandsOrderByWithRelationInput | LandsOrderByWithRelationInput[]
+    cursor?: LandsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LandsScalarFieldEnum | LandsScalarFieldEnum[]
   }
 
   /**
@@ -6250,6 +6368,7 @@ export namespace Prisma {
     owner?: boolean | LandOwnersDefaultArgs<ExtArgs>
     Projects?: boolean | Lands$ProjectsArgs<ExtArgs>
     ProjectProposal?: boolean | Lands$ProjectProposalArgs<ExtArgs>
+    _count?: boolean | LandsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["lands"]>
 
   export type LandsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6310,6 +6429,7 @@ export namespace Prisma {
     owner?: boolean | LandOwnersDefaultArgs<ExtArgs>
     Projects?: boolean | Lands$ProjectsArgs<ExtArgs>
     ProjectProposal?: boolean | Lands$ProjectProposalArgs<ExtArgs>
+    _count?: boolean | LandsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LandsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | LandOwnersDefaultArgs<ExtArgs>
@@ -6322,8 +6442,8 @@ export namespace Prisma {
     name: "Lands"
     objects: {
       owner: Prisma.$LandOwnersPayload<ExtArgs>
-      Projects: Prisma.$ProjectsPayload<ExtArgs> | null
-      ProjectProposal: Prisma.$ProjectProposalPayload<ExtArgs> | null
+      Projects: Prisma.$ProjectsPayload<ExtArgs>[]
+      ProjectProposal: Prisma.$ProjectProposalPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6735,8 +6855,8 @@ export namespace Prisma {
   export interface Prisma__LandsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     owner<T extends LandOwnersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LandOwnersDefaultArgs<ExtArgs>>): Prisma__LandOwnersClient<$Result.GetResult<Prisma.$LandOwnersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Projects<T extends Lands$ProjectsArgs<ExtArgs> = {}>(args?: Subset<T, Lands$ProjectsArgs<ExtArgs>>): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    ProjectProposal<T extends Lands$ProjectProposalArgs<ExtArgs> = {}>(args?: Subset<T, Lands$ProjectProposalArgs<ExtArgs>>): Prisma__ProjectProposalClient<$Result.GetResult<Prisma.$ProjectProposalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Projects<T extends Lands$ProjectsArgs<ExtArgs> = {}>(args?: Subset<T, Lands$ProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ProjectProposal<T extends Lands$ProjectProposalArgs<ExtArgs> = {}>(args?: Subset<T, Lands$ProjectProposalArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7192,6 +7312,11 @@ export namespace Prisma {
      */
     include?: ProjectsInclude<ExtArgs> | null
     where?: ProjectsWhereInput
+    orderBy?: ProjectsOrderByWithRelationInput | ProjectsOrderByWithRelationInput[]
+    cursor?: ProjectsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectsScalarFieldEnum | ProjectsScalarFieldEnum[]
   }
 
   /**
@@ -7211,6 +7336,11 @@ export namespace Prisma {
      */
     include?: ProjectProposalInclude<ExtArgs> | null
     where?: ProjectProposalWhereInput
+    orderBy?: ProjectProposalOrderByWithRelationInput | ProjectProposalOrderByWithRelationInput[]
+    cursor?: ProjectProposalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectProposalScalarFieldEnum | ProjectProposalScalarFieldEnum[]
   }
 
   /**
@@ -7430,7 +7560,7 @@ export namespace Prisma {
   export type InvestmentsGroupByOutputType = {
     id: string
     project_id: string
-    investor_id: string | null
+    investor_id: string
     value_invested: Decimal
     invested_date: Date
     owner_agree: $Enums.Agreement
@@ -7471,7 +7601,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
-    investor?: boolean | Investments$investorArgs<ExtArgs>
+    investor?: boolean | InvestorsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investments"]>
 
   export type InvestmentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7486,7 +7616,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
-    investor?: boolean | Investments$investorArgs<ExtArgs>
+    investor?: boolean | InvestorsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investments"]>
 
   export type InvestmentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7501,7 +7631,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
-    investor?: boolean | Investments$investorArgs<ExtArgs>
+    investor?: boolean | InvestorsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investments"]>
 
   export type InvestmentsSelectScalar = {
@@ -7520,27 +7650,27 @@ export namespace Prisma {
   export type InvestmentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "project_id" | "investor_id" | "value_invested" | "invested_date" | "owner_agree" | "company_agree" | "title" | "description" | "status", ExtArgs["result"]["investments"]>
   export type InvestmentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
-    investor?: boolean | Investments$investorArgs<ExtArgs>
+    investor?: boolean | InvestorsDefaultArgs<ExtArgs>
   }
   export type InvestmentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
-    investor?: boolean | Investments$investorArgs<ExtArgs>
+    investor?: boolean | InvestorsDefaultArgs<ExtArgs>
   }
   export type InvestmentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
-    investor?: boolean | Investments$investorArgs<ExtArgs>
+    investor?: boolean | InvestorsDefaultArgs<ExtArgs>
   }
 
   export type $InvestmentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Investments"
     objects: {
       project: Prisma.$ProjectsPayload<ExtArgs>
-      investor: Prisma.$InvestorsPayload<ExtArgs> | null
+      investor: Prisma.$InvestorsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       project_id: string
-      investor_id: string | null
+      investor_id: string
       value_invested: Prisma.Decimal
       invested_date: Date
       owner_agree: $Enums.Agreement
@@ -7943,7 +8073,7 @@ export namespace Prisma {
   export interface Prisma__InvestmentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectsDefaultArgs<ExtArgs>>): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    investor<T extends Investments$investorArgs<ExtArgs> = {}>(args?: Subset<T, Investments$investorArgs<ExtArgs>>): Prisma__InvestorsClient<$Result.GetResult<Prisma.$InvestorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    investor<T extends InvestorsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InvestorsDefaultArgs<ExtArgs>>): Prisma__InvestorsClient<$Result.GetResult<Prisma.$InvestorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8379,25 +8509,6 @@ export namespace Prisma {
   }
 
   /**
-   * Investments.investor
-   */
-  export type Investments$investorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Investors
-     */
-    select?: InvestorsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Investors
-     */
-    omit?: InvestorsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: InvestorsInclude<ExtArgs> | null
-    where?: InvestorsWhereInput
-  }
-
-  /**
    * Investments without action
    */
   export type InvestmentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8678,6 +8789,7 @@ export namespace Prisma {
     company?: boolean | Projects$companyArgs<ExtArgs>
     Investments?: boolean | Projects$InvestmentsArgs<ExtArgs>
     ProjectProposal?: boolean | Projects$ProjectProposalArgs<ExtArgs>
+    _count?: boolean | ProjectsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["projects"]>
 
   export type ProjectsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8732,6 +8844,7 @@ export namespace Prisma {
     company?: boolean | Projects$companyArgs<ExtArgs>
     Investments?: boolean | Projects$InvestmentsArgs<ExtArgs>
     ProjectProposal?: boolean | Projects$ProjectProposalArgs<ExtArgs>
+    _count?: boolean | ProjectsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProjectsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     land?: boolean | LandsDefaultArgs<ExtArgs>
@@ -8747,8 +8860,8 @@ export namespace Prisma {
     objects: {
       land: Prisma.$LandsPayload<ExtArgs>
       company: Prisma.$CompaniesPayload<ExtArgs> | null
-      Investments: Prisma.$InvestmentsPayload<ExtArgs> | null
-      ProjectProposal: Prisma.$ProjectProposalPayload<ExtArgs> | null
+      Investments: Prisma.$InvestmentsPayload<ExtArgs>[]
+      ProjectProposal: Prisma.$ProjectProposalPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9158,8 +9271,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     land<T extends LandsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LandsDefaultArgs<ExtArgs>>): Prisma__LandsClient<$Result.GetResult<Prisma.$LandsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     company<T extends Projects$companyArgs<ExtArgs> = {}>(args?: Subset<T, Projects$companyArgs<ExtArgs>>): Prisma__CompaniesClient<$Result.GetResult<Prisma.$CompaniesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    Investments<T extends Projects$InvestmentsArgs<ExtArgs> = {}>(args?: Subset<T, Projects$InvestmentsArgs<ExtArgs>>): Prisma__InvestmentsClient<$Result.GetResult<Prisma.$InvestmentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    ProjectProposal<T extends Projects$ProjectProposalArgs<ExtArgs> = {}>(args?: Subset<T, Projects$ProjectProposalArgs<ExtArgs>>): Prisma__ProjectProposalClient<$Result.GetResult<Prisma.$ProjectProposalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Investments<T extends Projects$InvestmentsArgs<ExtArgs> = {}>(args?: Subset<T, Projects$InvestmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvestmentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ProjectProposal<T extends Projects$ProjectProposalArgs<ExtArgs> = {}>(args?: Subset<T, Projects$ProjectProposalArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9631,6 +9744,11 @@ export namespace Prisma {
      */
     include?: InvestmentsInclude<ExtArgs> | null
     where?: InvestmentsWhereInput
+    orderBy?: InvestmentsOrderByWithRelationInput | InvestmentsOrderByWithRelationInput[]
+    cursor?: InvestmentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvestmentsScalarFieldEnum | InvestmentsScalarFieldEnum[]
   }
 
   /**
@@ -9650,6 +9768,11 @@ export namespace Prisma {
      */
     include?: ProjectProposalInclude<ExtArgs> | null
     where?: ProjectProposalWhereInput
+    orderBy?: ProjectProposalOrderByWithRelationInput | ProjectProposalOrderByWithRelationInput[]
+    cursor?: ProjectProposalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectProposalScalarFieldEnum | ProjectProposalScalarFieldEnum[]
   }
 
   /**
@@ -11128,7 +11251,7 @@ export namespace Prisma {
     user_id?: UuidFilter<"LandOwners"> | string
     document_id?: StringFilter<"LandOwners"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Lands?: XOR<LandsNullableScalarRelationFilter, LandsWhereInput> | null
+    Lands?: LandsListRelationFilter
   }
 
   export type LandOwnersOrderByWithRelationInput = {
@@ -11136,7 +11259,7 @@ export namespace Prisma {
     user_id?: SortOrder
     document_id?: SortOrder
     user?: UserOrderByWithRelationInput
-    Lands?: LandsOrderByWithRelationInput
+    Lands?: LandsOrderByRelationAggregateInput
   }
 
   export type LandOwnersWhereUniqueInput = Prisma.AtLeast<{
@@ -11147,7 +11270,7 @@ export namespace Prisma {
     NOT?: LandOwnersWhereInput | LandOwnersWhereInput[]
     document_id?: StringFilter<"LandOwners"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Lands?: XOR<LandsNullableScalarRelationFilter, LandsWhereInput> | null
+    Lands?: LandsListRelationFilter
   }, "id" | "user_id">
 
   export type LandOwnersOrderByWithAggregationInput = {
@@ -11288,8 +11411,8 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Lands"> | Date | string
     updated_at?: DateTimeFilter<"Lands"> | Date | string
     owner?: XOR<LandOwnersScalarRelationFilter, LandOwnersWhereInput>
-    Projects?: XOR<ProjectsNullableScalarRelationFilter, ProjectsWhereInput> | null
-    ProjectProposal?: XOR<ProjectProposalNullableScalarRelationFilter, ProjectProposalWhereInput> | null
+    Projects?: ProjectsListRelationFilter
+    ProjectProposal?: ProjectProposalListRelationFilter
   }
 
   export type LandsOrderByWithRelationInput = {
@@ -11308,16 +11431,16 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     owner?: LandOwnersOrderByWithRelationInput
-    Projects?: ProjectsOrderByWithRelationInput
-    ProjectProposal?: ProjectProposalOrderByWithRelationInput
+    Projects?: ProjectsOrderByRelationAggregateInput
+    ProjectProposal?: ProjectProposalOrderByRelationAggregateInput
   }
 
   export type LandsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    owner_id?: string
     AND?: LandsWhereInput | LandsWhereInput[]
     OR?: LandsWhereInput[]
     NOT?: LandsWhereInput | LandsWhereInput[]
+    owner_id?: UuidFilter<"Lands"> | string
     price?: DecimalFilter<"Lands"> | Decimal | DecimalJsLike | number | string
     availability?: BoolFilter<"Lands"> | boolean
     street?: StringFilter<"Lands"> | string
@@ -11331,9 +11454,9 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Lands"> | Date | string
     updated_at?: DateTimeFilter<"Lands"> | Date | string
     owner?: XOR<LandOwnersScalarRelationFilter, LandOwnersWhereInput>
-    Projects?: XOR<ProjectsNullableScalarRelationFilter, ProjectsWhereInput> | null
-    ProjectProposal?: XOR<ProjectProposalNullableScalarRelationFilter, ProjectProposalWhereInput> | null
-  }, "id" | "owner_id">
+    Projects?: ProjectsListRelationFilter
+    ProjectProposal?: ProjectProposalListRelationFilter
+  }, "id">
 
   export type LandsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11383,7 +11506,7 @@ export namespace Prisma {
     NOT?: InvestmentsWhereInput | InvestmentsWhereInput[]
     id?: UuidFilter<"Investments"> | string
     project_id?: UuidFilter<"Investments"> | string
-    investor_id?: UuidNullableFilter<"Investments"> | string | null
+    investor_id?: UuidFilter<"Investments"> | string
     value_invested?: DecimalFilter<"Investments"> | Decimal | DecimalJsLike | number | string
     invested_date?: DateTimeFilter<"Investments"> | Date | string
     owner_agree?: EnumAgreementFilter<"Investments"> | $Enums.Agreement
@@ -11392,13 +11515,13 @@ export namespace Prisma {
     description?: StringNullableFilter<"Investments"> | string | null
     status?: EnumInvestmentStatusFilter<"Investments"> | $Enums.InvestmentStatus
     project?: XOR<ProjectsScalarRelationFilter, ProjectsWhereInput>
-    investor?: XOR<InvestorsNullableScalarRelationFilter, InvestorsWhereInput> | null
+    investor?: XOR<InvestorsScalarRelationFilter, InvestorsWhereInput>
   }
 
   export type InvestmentsOrderByWithRelationInput = {
     id?: SortOrder
     project_id?: SortOrder
-    investor_id?: SortOrderInput | SortOrder
+    investor_id?: SortOrder
     value_invested?: SortOrder
     invested_date?: SortOrder
     owner_agree?: SortOrder
@@ -11412,11 +11535,11 @@ export namespace Prisma {
 
   export type InvestmentsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    project_id?: string
     AND?: InvestmentsWhereInput | InvestmentsWhereInput[]
     OR?: InvestmentsWhereInput[]
     NOT?: InvestmentsWhereInput | InvestmentsWhereInput[]
-    investor_id?: UuidNullableFilter<"Investments"> | string | null
+    project_id?: UuidFilter<"Investments"> | string
+    investor_id?: UuidFilter<"Investments"> | string
     value_invested?: DecimalFilter<"Investments"> | Decimal | DecimalJsLike | number | string
     invested_date?: DateTimeFilter<"Investments"> | Date | string
     owner_agree?: EnumAgreementFilter<"Investments"> | $Enums.Agreement
@@ -11425,13 +11548,13 @@ export namespace Prisma {
     description?: StringNullableFilter<"Investments"> | string | null
     status?: EnumInvestmentStatusFilter<"Investments"> | $Enums.InvestmentStatus
     project?: XOR<ProjectsScalarRelationFilter, ProjectsWhereInput>
-    investor?: XOR<InvestorsNullableScalarRelationFilter, InvestorsWhereInput> | null
-  }, "id" | "project_id">
+    investor?: XOR<InvestorsScalarRelationFilter, InvestorsWhereInput>
+  }, "id">
 
   export type InvestmentsOrderByWithAggregationInput = {
     id?: SortOrder
     project_id?: SortOrder
-    investor_id?: SortOrderInput | SortOrder
+    investor_id?: SortOrder
     value_invested?: SortOrder
     invested_date?: SortOrder
     owner_agree?: SortOrder
@@ -11452,7 +11575,7 @@ export namespace Prisma {
     NOT?: InvestmentsScalarWhereWithAggregatesInput | InvestmentsScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Investments"> | string
     project_id?: UuidWithAggregatesFilter<"Investments"> | string
-    investor_id?: UuidNullableWithAggregatesFilter<"Investments"> | string | null
+    investor_id?: UuidWithAggregatesFilter<"Investments"> | string
     value_invested?: DecimalWithAggregatesFilter<"Investments"> | Decimal | DecimalJsLike | number | string
     invested_date?: DateTimeWithAggregatesFilter<"Investments"> | Date | string
     owner_agree?: EnumAgreementWithAggregatesFilter<"Investments"> | $Enums.Agreement
@@ -11479,8 +11602,8 @@ export namespace Prisma {
     area?: DecimalFilter<"Projects"> | Decimal | DecimalJsLike | number | string
     land?: XOR<LandsScalarRelationFilter, LandsWhereInput>
     company?: XOR<CompaniesNullableScalarRelationFilter, CompaniesWhereInput> | null
-    Investments?: XOR<InvestmentsNullableScalarRelationFilter, InvestmentsWhereInput> | null
-    ProjectProposal?: XOR<ProjectProposalNullableScalarRelationFilter, ProjectProposalWhereInput> | null
+    Investments?: InvestmentsListRelationFilter
+    ProjectProposal?: ProjectProposalListRelationFilter
   }
 
   export type ProjectsOrderByWithRelationInput = {
@@ -11497,16 +11620,16 @@ export namespace Prisma {
     area?: SortOrder
     land?: LandsOrderByWithRelationInput
     company?: CompaniesOrderByWithRelationInput
-    Investments?: InvestmentsOrderByWithRelationInput
-    ProjectProposal?: ProjectProposalOrderByWithRelationInput
+    Investments?: InvestmentsOrderByRelationAggregateInput
+    ProjectProposal?: ProjectProposalOrderByRelationAggregateInput
   }
 
   export type ProjectsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    land_id?: string
     AND?: ProjectsWhereInput | ProjectsWhereInput[]
     OR?: ProjectsWhereInput[]
     NOT?: ProjectsWhereInput | ProjectsWhereInput[]
+    land_id?: UuidFilter<"Projects"> | string
     company_id?: UuidNullableFilter<"Projects"> | string | null
     power_kw?: DecimalFilter<"Projects"> | Decimal | DecimalJsLike | number | string
     cost?: DecimalFilter<"Projects"> | Decimal | DecimalJsLike | number | string
@@ -11518,9 +11641,9 @@ export namespace Prisma {
     area?: DecimalFilter<"Projects"> | Decimal | DecimalJsLike | number | string
     land?: XOR<LandsScalarRelationFilter, LandsWhereInput>
     company?: XOR<CompaniesNullableScalarRelationFilter, CompaniesWhereInput> | null
-    Investments?: XOR<InvestmentsNullableScalarRelationFilter, InvestmentsWhereInput> | null
-    ProjectProposal?: XOR<ProjectProposalNullableScalarRelationFilter, ProjectProposalWhereInput> | null
-  }, "id" | "land_id">
+    Investments?: InvestmentsListRelationFilter
+    ProjectProposal?: ProjectProposalListRelationFilter
+  }, "id">
 
   export type ProjectsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11585,17 +11708,17 @@ export namespace Prisma {
 
   export type ProjectProposalWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    project_id?: string
-    land_id?: string
     AND?: ProjectProposalWhereInput | ProjectProposalWhereInput[]
     OR?: ProjectProposalWhereInput[]
     NOT?: ProjectProposalWhereInput | ProjectProposalWhereInput[]
+    project_id?: UuidFilter<"ProjectProposal"> | string
+    land_id?: UuidFilter<"ProjectProposal"> | string
     status?: EnumAgreementStatusFilter<"ProjectProposal"> | $Enums.AgreementStatus
     created_at?: DateTimeFilter<"ProjectProposal"> | Date | string
     owner_agreed?: EnumOwnerAgreementStatusFilter<"ProjectProposal"> | $Enums.OwnerAgreementStatus
     project?: XOR<ProjectsScalarRelationFilter, ProjectsWhereInput>
     land?: XOR<LandsScalarRelationFilter, LandsWhereInput>
-  }, "id" | "project_id" | "land_id">
+  }, "id">
 
   export type ProjectProposalOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11707,28 +11830,28 @@ export namespace Prisma {
     id?: string
     document_id: string
     user: UserCreateNestedOneWithoutLandOwnerInput
-    Lands?: LandsCreateNestedOneWithoutOwnerInput
+    Lands?: LandsCreateNestedManyWithoutOwnerInput
   }
 
   export type LandOwnersUncheckedCreateInput = {
     id?: string
     user_id: string
     document_id: string
-    Lands?: LandsUncheckedCreateNestedOneWithoutOwnerInput
+    Lands?: LandsUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type LandOwnersUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     document_id?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutLandOwnerNestedInput
-    Lands?: LandsUpdateOneWithoutOwnerNestedInput
+    Lands?: LandsUpdateManyWithoutOwnerNestedInput
   }
 
   export type LandOwnersUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     document_id?: StringFieldUpdateOperationsInput | string
-    Lands?: LandsUncheckedUpdateOneWithoutOwnerNestedInput
+    Lands?: LandsUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type LandOwnersCreateManyInput = {
@@ -11860,8 +11983,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     owner: LandOwnersCreateNestedOneWithoutLandsInput
-    Projects?: ProjectsCreateNestedOneWithoutLandInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutLandInput
+    Projects?: ProjectsCreateNestedManyWithoutLandInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutLandInput
   }
 
   export type LandsUncheckedCreateInput = {
@@ -11879,8 +12002,8 @@ export namespace Prisma {
     country: string
     created_at?: Date | string
     updated_at?: Date | string
-    Projects?: ProjectsUncheckedCreateNestedOneWithoutLandInput
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutLandInput
+    Projects?: ProjectsUncheckedCreateNestedManyWithoutLandInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutLandInput
   }
 
   export type LandsUpdateInput = {
@@ -11898,8 +12021,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: LandOwnersUpdateOneRequiredWithoutLandsNestedInput
-    Projects?: ProjectsUpdateOneWithoutLandNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutLandNestedInput
+    Projects?: ProjectsUpdateManyWithoutLandNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutLandNestedInput
   }
 
   export type LandsUncheckedUpdateInput = {
@@ -11917,8 +12040,8 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    Projects?: ProjectsUncheckedUpdateOneWithoutLandNestedInput
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutLandNestedInput
+    Projects?: ProjectsUncheckedUpdateManyWithoutLandNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutLandNestedInput
   }
 
   export type LandsCreateManyInput = {
@@ -11981,13 +12104,13 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.InvestmentStatus
     project: ProjectsCreateNestedOneWithoutInvestmentsInput
-    investor?: InvestorsCreateNestedOneWithoutInvestmentsInput
+    investor: InvestorsCreateNestedOneWithoutInvestmentsInput
   }
 
   export type InvestmentsUncheckedCreateInput = {
     id?: string
     project_id: string
-    investor_id?: string | null
+    investor_id: string
     value_invested: Decimal | DecimalJsLike | number | string
     invested_date?: Date | string
     owner_agree?: $Enums.Agreement
@@ -12007,13 +12130,13 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
     project?: ProjectsUpdateOneRequiredWithoutInvestmentsNestedInput
-    investor?: InvestorsUpdateOneWithoutInvestmentsNestedInput
+    investor?: InvestorsUpdateOneRequiredWithoutInvestmentsNestedInput
   }
 
   export type InvestmentsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     project_id?: StringFieldUpdateOperationsInput | string
-    investor_id?: NullableStringFieldUpdateOperationsInput | string | null
+    investor_id?: StringFieldUpdateOperationsInput | string
     value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
     owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
@@ -12026,7 +12149,7 @@ export namespace Prisma {
   export type InvestmentsCreateManyInput = {
     id?: string
     project_id: string
-    investor_id?: string | null
+    investor_id: string
     value_invested: Decimal | DecimalJsLike | number | string
     invested_date?: Date | string
     owner_agree?: $Enums.Agreement
@@ -12050,7 +12173,7 @@ export namespace Prisma {
   export type InvestmentsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     project_id?: StringFieldUpdateOperationsInput | string
-    investor_id?: NullableStringFieldUpdateOperationsInput | string | null
+    investor_id?: StringFieldUpdateOperationsInput | string
     value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
     owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
@@ -12072,8 +12195,8 @@ export namespace Prisma {
     area: Decimal | DecimalJsLike | number | string
     land: LandsCreateNestedOneWithoutProjectsInput
     company?: CompaniesCreateNestedOneWithoutProjectsInput
-    Investments?: InvestmentsCreateNestedOneWithoutProjectInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsCreateNestedManyWithoutProjectInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsUncheckedCreateInput = {
@@ -12088,8 +12211,8 @@ export namespace Prisma {
     title: string
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedCreateNestedOneWithoutProjectInput
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsUncheckedCreateNestedManyWithoutProjectInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsUpdateInput = {
@@ -12104,8 +12227,8 @@ export namespace Prisma {
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     land?: LandsUpdateOneRequiredWithoutProjectsNestedInput
     company?: CompaniesUpdateOneWithoutProjectsNestedInput
-    Investments?: InvestmentsUpdateOneWithoutProjectNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutProjectNestedInput
+    Investments?: InvestmentsUpdateManyWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectsUncheckedUpdateInput = {
@@ -12120,8 +12243,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedUpdateOneWithoutProjectNestedInput
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutProjectNestedInput
+    Investments?: InvestmentsUncheckedUpdateManyWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectsCreateManyInput = {
@@ -12415,9 +12538,14 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
-  export type LandsNullableScalarRelationFilter = {
-    is?: LandsWhereInput | null
-    isNot?: LandsWhereInput | null
+  export type LandsListRelationFilter = {
+    every?: LandsWhereInput
+    some?: LandsWhereInput
+    none?: LandsWhereInput
+  }
+
+  export type LandsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type LandOwnersCountOrderByAggregateInput = {
@@ -12518,14 +12646,14 @@ export namespace Prisma {
     isNot?: LandOwnersWhereInput
   }
 
-  export type ProjectsNullableScalarRelationFilter = {
-    is?: ProjectsWhereInput | null
-    isNot?: ProjectsWhereInput | null
+  export type ProjectProposalListRelationFilter = {
+    every?: ProjectProposalWhereInput
+    some?: ProjectProposalWhereInput
+    none?: ProjectProposalWhereInput
   }
 
-  export type ProjectProposalNullableScalarRelationFilter = {
-    is?: ProjectProposalWhereInput | null
-    isNot?: ProjectProposalWhereInput | null
+  export type ProjectProposalOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type LandsCountOrderByAggregateInput = {
@@ -12611,18 +12739,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type UuidNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
-  }
-
   export type EnumAgreementFilter<$PrismaModel = never> = {
     equals?: $Enums.Agreement | EnumAgreementFieldRefInput<$PrismaModel>
     in?: $Enums.Agreement[] | ListEnumAgreementFieldRefInput<$PrismaModel>
@@ -12640,6 +12756,11 @@ export namespace Prisma {
   export type ProjectsScalarRelationFilter = {
     is?: ProjectsWhereInput
     isNot?: ProjectsWhereInput
+  }
+
+  export type InvestorsScalarRelationFilter = {
+    is?: InvestorsWhereInput
+    isNot?: InvestorsWhereInput
   }
 
   export type InvestmentsCountOrderByAggregateInput = {
@@ -12689,21 +12810,6 @@ export namespace Prisma {
     value_invested?: SortOrder
   }
 
-  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type EnumAgreementWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Agreement | EnumAgreementFieldRefInput<$PrismaModel>
     in?: $Enums.Agreement[] | ListEnumAgreementFieldRefInput<$PrismaModel>
@@ -12724,6 +12830,18 @@ export namespace Prisma {
     _max?: NestedEnumInvestmentStatusFilter<$PrismaModel>
   }
 
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
   export type EnumSolarProjectStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.SolarProjectStatus | EnumSolarProjectStatusFieldRefInput<$PrismaModel>
     in?: $Enums.SolarProjectStatus[] | ListEnumSolarProjectStatusFieldRefInput<$PrismaModel>
@@ -12734,11 +12852,6 @@ export namespace Prisma {
   export type LandsScalarRelationFilter = {
     is?: LandsWhereInput
     isNot?: LandsWhereInput
-  }
-
-  export type InvestmentsNullableScalarRelationFilter = {
-    is?: InvestmentsWhereInput | null
-    isNot?: InvestmentsWhereInput | null
   }
 
   export type ProjectsCountOrderByAggregateInput = {
@@ -12795,6 +12908,21 @@ export namespace Prisma {
     cost?: SortOrder
     estimated_return?: SortOrder
     area?: SortOrder
+  }
+
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumSolarProjectStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -12986,16 +13114,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type LandsCreateNestedOneWithoutOwnerInput = {
-    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput>
-    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput
-    connect?: LandsWhereUniqueInput
+  export type LandsCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput> | LandsCreateWithoutOwnerInput[] | LandsUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput | LandsCreateOrConnectWithoutOwnerInput[]
+    createMany?: LandsCreateManyOwnerInputEnvelope
+    connect?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
   }
 
-  export type LandsUncheckedCreateNestedOneWithoutOwnerInput = {
-    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput>
-    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput
-    connect?: LandsWhereUniqueInput
+  export type LandsUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput> | LandsCreateWithoutOwnerInput[] | LandsUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput | LandsCreateOrConnectWithoutOwnerInput[]
+    createMany?: LandsCreateManyOwnerInputEnvelope
+    connect?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutLandOwnerNestedInput = {
@@ -13006,24 +13136,32 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLandOwnerInput, UserUpdateWithoutLandOwnerInput>, UserUncheckedUpdateWithoutLandOwnerInput>
   }
 
-  export type LandsUpdateOneWithoutOwnerNestedInput = {
-    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput>
-    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput
-    upsert?: LandsUpsertWithoutOwnerInput
-    disconnect?: LandsWhereInput | boolean
-    delete?: LandsWhereInput | boolean
-    connect?: LandsWhereUniqueInput
-    update?: XOR<XOR<LandsUpdateToOneWithWhereWithoutOwnerInput, LandsUpdateWithoutOwnerInput>, LandsUncheckedUpdateWithoutOwnerInput>
+  export type LandsUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput> | LandsCreateWithoutOwnerInput[] | LandsUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput | LandsCreateOrConnectWithoutOwnerInput[]
+    upsert?: LandsUpsertWithWhereUniqueWithoutOwnerInput | LandsUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: LandsCreateManyOwnerInputEnvelope
+    set?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    disconnect?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    delete?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    connect?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    update?: LandsUpdateWithWhereUniqueWithoutOwnerInput | LandsUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: LandsUpdateManyWithWhereWithoutOwnerInput | LandsUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: LandsScalarWhereInput | LandsScalarWhereInput[]
   }
 
-  export type LandsUncheckedUpdateOneWithoutOwnerNestedInput = {
-    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput>
-    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput
-    upsert?: LandsUpsertWithoutOwnerInput
-    disconnect?: LandsWhereInput | boolean
-    delete?: LandsWhereInput | boolean
-    connect?: LandsWhereUniqueInput
-    update?: XOR<XOR<LandsUpdateToOneWithWhereWithoutOwnerInput, LandsUpdateWithoutOwnerInput>, LandsUncheckedUpdateWithoutOwnerInput>
+  export type LandsUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput> | LandsCreateWithoutOwnerInput[] | LandsUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: LandsCreateOrConnectWithoutOwnerInput | LandsCreateOrConnectWithoutOwnerInput[]
+    upsert?: LandsUpsertWithWhereUniqueWithoutOwnerInput | LandsUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: LandsCreateManyOwnerInputEnvelope
+    set?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    disconnect?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    delete?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    connect?: LandsWhereUniqueInput | LandsWhereUniqueInput[]
+    update?: LandsUpdateWithWhereUniqueWithoutOwnerInput | LandsUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: LandsUpdateManyWithWhereWithoutOwnerInput | LandsUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: LandsScalarWhereInput | LandsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCompanyInput = {
@@ -13144,28 +13282,32 @@ export namespace Prisma {
     connect?: LandOwnersWhereUniqueInput
   }
 
-  export type ProjectsCreateNestedOneWithoutLandInput = {
-    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput
-    connect?: ProjectsWhereUniqueInput
+  export type ProjectsCreateNestedManyWithoutLandInput = {
+    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput> | ProjectsCreateWithoutLandInput[] | ProjectsUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput | ProjectsCreateOrConnectWithoutLandInput[]
+    createMany?: ProjectsCreateManyLandInputEnvelope
+    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
   }
 
-  export type ProjectProposalCreateNestedOneWithoutLandInput = {
-    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput
-    connect?: ProjectProposalWhereUniqueInput
+  export type ProjectProposalCreateNestedManyWithoutLandInput = {
+    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput> | ProjectProposalCreateWithoutLandInput[] | ProjectProposalUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput | ProjectProposalCreateOrConnectWithoutLandInput[]
+    createMany?: ProjectProposalCreateManyLandInputEnvelope
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
   }
 
-  export type ProjectsUncheckedCreateNestedOneWithoutLandInput = {
-    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput
-    connect?: ProjectsWhereUniqueInput
+  export type ProjectsUncheckedCreateNestedManyWithoutLandInput = {
+    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput> | ProjectsCreateWithoutLandInput[] | ProjectsUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput | ProjectsCreateOrConnectWithoutLandInput[]
+    createMany?: ProjectsCreateManyLandInputEnvelope
+    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
   }
 
-  export type ProjectProposalUncheckedCreateNestedOneWithoutLandInput = {
-    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput
-    connect?: ProjectProposalWhereUniqueInput
+  export type ProjectProposalUncheckedCreateNestedManyWithoutLandInput = {
+    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput> | ProjectProposalCreateWithoutLandInput[] | ProjectProposalUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput | ProjectProposalCreateOrConnectWithoutLandInput[]
+    createMany?: ProjectProposalCreateManyLandInputEnvelope
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -13188,44 +13330,60 @@ export namespace Prisma {
     update?: XOR<XOR<LandOwnersUpdateToOneWithWhereWithoutLandsInput, LandOwnersUpdateWithoutLandsInput>, LandOwnersUncheckedUpdateWithoutLandsInput>
   }
 
-  export type ProjectsUpdateOneWithoutLandNestedInput = {
-    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput
-    upsert?: ProjectsUpsertWithoutLandInput
-    disconnect?: ProjectsWhereInput | boolean
-    delete?: ProjectsWhereInput | boolean
-    connect?: ProjectsWhereUniqueInput
-    update?: XOR<XOR<ProjectsUpdateToOneWithWhereWithoutLandInput, ProjectsUpdateWithoutLandInput>, ProjectsUncheckedUpdateWithoutLandInput>
+  export type ProjectsUpdateManyWithoutLandNestedInput = {
+    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput> | ProjectsCreateWithoutLandInput[] | ProjectsUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput | ProjectsCreateOrConnectWithoutLandInput[]
+    upsert?: ProjectsUpsertWithWhereUniqueWithoutLandInput | ProjectsUpsertWithWhereUniqueWithoutLandInput[]
+    createMany?: ProjectsCreateManyLandInputEnvelope
+    set?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    disconnect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    delete?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    update?: ProjectsUpdateWithWhereUniqueWithoutLandInput | ProjectsUpdateWithWhereUniqueWithoutLandInput[]
+    updateMany?: ProjectsUpdateManyWithWhereWithoutLandInput | ProjectsUpdateManyWithWhereWithoutLandInput[]
+    deleteMany?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
   }
 
-  export type ProjectProposalUpdateOneWithoutLandNestedInput = {
-    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput
-    upsert?: ProjectProposalUpsertWithoutLandInput
-    disconnect?: ProjectProposalWhereInput | boolean
-    delete?: ProjectProposalWhereInput | boolean
-    connect?: ProjectProposalWhereUniqueInput
-    update?: XOR<XOR<ProjectProposalUpdateToOneWithWhereWithoutLandInput, ProjectProposalUpdateWithoutLandInput>, ProjectProposalUncheckedUpdateWithoutLandInput>
+  export type ProjectProposalUpdateManyWithoutLandNestedInput = {
+    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput> | ProjectProposalCreateWithoutLandInput[] | ProjectProposalUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput | ProjectProposalCreateOrConnectWithoutLandInput[]
+    upsert?: ProjectProposalUpsertWithWhereUniqueWithoutLandInput | ProjectProposalUpsertWithWhereUniqueWithoutLandInput[]
+    createMany?: ProjectProposalCreateManyLandInputEnvelope
+    set?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    disconnect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    delete?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    update?: ProjectProposalUpdateWithWhereUniqueWithoutLandInput | ProjectProposalUpdateWithWhereUniqueWithoutLandInput[]
+    updateMany?: ProjectProposalUpdateManyWithWhereWithoutLandInput | ProjectProposalUpdateManyWithWhereWithoutLandInput[]
+    deleteMany?: ProjectProposalScalarWhereInput | ProjectProposalScalarWhereInput[]
   }
 
-  export type ProjectsUncheckedUpdateOneWithoutLandNestedInput = {
-    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput
-    upsert?: ProjectsUpsertWithoutLandInput
-    disconnect?: ProjectsWhereInput | boolean
-    delete?: ProjectsWhereInput | boolean
-    connect?: ProjectsWhereUniqueInput
-    update?: XOR<XOR<ProjectsUpdateToOneWithWhereWithoutLandInput, ProjectsUpdateWithoutLandInput>, ProjectsUncheckedUpdateWithoutLandInput>
+  export type ProjectsUncheckedUpdateManyWithoutLandNestedInput = {
+    create?: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput> | ProjectsCreateWithoutLandInput[] | ProjectsUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectsCreateOrConnectWithoutLandInput | ProjectsCreateOrConnectWithoutLandInput[]
+    upsert?: ProjectsUpsertWithWhereUniqueWithoutLandInput | ProjectsUpsertWithWhereUniqueWithoutLandInput[]
+    createMany?: ProjectsCreateManyLandInputEnvelope
+    set?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    disconnect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    delete?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    connect?: ProjectsWhereUniqueInput | ProjectsWhereUniqueInput[]
+    update?: ProjectsUpdateWithWhereUniqueWithoutLandInput | ProjectsUpdateWithWhereUniqueWithoutLandInput[]
+    updateMany?: ProjectsUpdateManyWithWhereWithoutLandInput | ProjectsUpdateManyWithWhereWithoutLandInput[]
+    deleteMany?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
   }
 
-  export type ProjectProposalUncheckedUpdateOneWithoutLandNestedInput = {
-    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput
-    upsert?: ProjectProposalUpsertWithoutLandInput
-    disconnect?: ProjectProposalWhereInput | boolean
-    delete?: ProjectProposalWhereInput | boolean
-    connect?: ProjectProposalWhereUniqueInput
-    update?: XOR<XOR<ProjectProposalUpdateToOneWithWhereWithoutLandInput, ProjectProposalUpdateWithoutLandInput>, ProjectProposalUncheckedUpdateWithoutLandInput>
+  export type ProjectProposalUncheckedUpdateManyWithoutLandNestedInput = {
+    create?: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput> | ProjectProposalCreateWithoutLandInput[] | ProjectProposalUncheckedCreateWithoutLandInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutLandInput | ProjectProposalCreateOrConnectWithoutLandInput[]
+    upsert?: ProjectProposalUpsertWithWhereUniqueWithoutLandInput | ProjectProposalUpsertWithWhereUniqueWithoutLandInput[]
+    createMany?: ProjectProposalCreateManyLandInputEnvelope
+    set?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    disconnect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    delete?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    update?: ProjectProposalUpdateWithWhereUniqueWithoutLandInput | ProjectProposalUpdateWithWhereUniqueWithoutLandInput[]
+    updateMany?: ProjectProposalUpdateManyWithWhereWithoutLandInput | ProjectProposalUpdateManyWithWhereWithoutLandInput[]
+    deleteMany?: ProjectProposalScalarWhereInput | ProjectProposalScalarWhereInput[]
   }
 
   export type ProjectsCreateNestedOneWithoutInvestmentsInput = {
@@ -13256,12 +13414,10 @@ export namespace Prisma {
     update?: XOR<XOR<ProjectsUpdateToOneWithWhereWithoutInvestmentsInput, ProjectsUpdateWithoutInvestmentsInput>, ProjectsUncheckedUpdateWithoutInvestmentsInput>
   }
 
-  export type InvestorsUpdateOneWithoutInvestmentsNestedInput = {
+  export type InvestorsUpdateOneRequiredWithoutInvestmentsNestedInput = {
     create?: XOR<InvestorsCreateWithoutInvestmentsInput, InvestorsUncheckedCreateWithoutInvestmentsInput>
     connectOrCreate?: InvestorsCreateOrConnectWithoutInvestmentsInput
     upsert?: InvestorsUpsertWithoutInvestmentsInput
-    disconnect?: InvestorsWhereInput | boolean
-    delete?: InvestorsWhereInput | boolean
     connect?: InvestorsWhereUniqueInput
     update?: XOR<XOR<InvestorsUpdateToOneWithWhereWithoutInvestmentsInput, InvestorsUpdateWithoutInvestmentsInput>, InvestorsUncheckedUpdateWithoutInvestmentsInput>
   }
@@ -13278,28 +13434,32 @@ export namespace Prisma {
     connect?: CompaniesWhereUniqueInput
   }
 
-  export type InvestmentsCreateNestedOneWithoutProjectInput = {
-    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput
-    connect?: InvestmentsWhereUniqueInput
+  export type InvestmentsCreateNestedManyWithoutProjectInput = {
+    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput> | InvestmentsCreateWithoutProjectInput[] | InvestmentsUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput | InvestmentsCreateOrConnectWithoutProjectInput[]
+    createMany?: InvestmentsCreateManyProjectInputEnvelope
+    connect?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
   }
 
-  export type ProjectProposalCreateNestedOneWithoutProjectInput = {
-    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput
-    connect?: ProjectProposalWhereUniqueInput
+  export type ProjectProposalCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput> | ProjectProposalCreateWithoutProjectInput[] | ProjectProposalUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput | ProjectProposalCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectProposalCreateManyProjectInputEnvelope
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
   }
 
-  export type InvestmentsUncheckedCreateNestedOneWithoutProjectInput = {
-    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput
-    connect?: InvestmentsWhereUniqueInput
+  export type InvestmentsUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput> | InvestmentsCreateWithoutProjectInput[] | InvestmentsUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput | InvestmentsCreateOrConnectWithoutProjectInput[]
+    createMany?: InvestmentsCreateManyProjectInputEnvelope
+    connect?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
   }
 
-  export type ProjectProposalUncheckedCreateNestedOneWithoutProjectInput = {
-    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput
-    connect?: ProjectProposalWhereUniqueInput
+  export type ProjectProposalUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput> | ProjectProposalCreateWithoutProjectInput[] | ProjectProposalUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput | ProjectProposalCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectProposalCreateManyProjectInputEnvelope
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
   }
 
   export type EnumSolarProjectStatusFieldUpdateOperationsInput = {
@@ -13324,44 +13484,60 @@ export namespace Prisma {
     update?: XOR<XOR<CompaniesUpdateToOneWithWhereWithoutProjectsInput, CompaniesUpdateWithoutProjectsInput>, CompaniesUncheckedUpdateWithoutProjectsInput>
   }
 
-  export type InvestmentsUpdateOneWithoutProjectNestedInput = {
-    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput
-    upsert?: InvestmentsUpsertWithoutProjectInput
-    disconnect?: InvestmentsWhereInput | boolean
-    delete?: InvestmentsWhereInput | boolean
-    connect?: InvestmentsWhereUniqueInput
-    update?: XOR<XOR<InvestmentsUpdateToOneWithWhereWithoutProjectInput, InvestmentsUpdateWithoutProjectInput>, InvestmentsUncheckedUpdateWithoutProjectInput>
+  export type InvestmentsUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput> | InvestmentsCreateWithoutProjectInput[] | InvestmentsUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput | InvestmentsCreateOrConnectWithoutProjectInput[]
+    upsert?: InvestmentsUpsertWithWhereUniqueWithoutProjectInput | InvestmentsUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: InvestmentsCreateManyProjectInputEnvelope
+    set?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    disconnect?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    delete?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    connect?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    update?: InvestmentsUpdateWithWhereUniqueWithoutProjectInput | InvestmentsUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: InvestmentsUpdateManyWithWhereWithoutProjectInput | InvestmentsUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: InvestmentsScalarWhereInput | InvestmentsScalarWhereInput[]
   }
 
-  export type ProjectProposalUpdateOneWithoutProjectNestedInput = {
-    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput
-    upsert?: ProjectProposalUpsertWithoutProjectInput
-    disconnect?: ProjectProposalWhereInput | boolean
-    delete?: ProjectProposalWhereInput | boolean
-    connect?: ProjectProposalWhereUniqueInput
-    update?: XOR<XOR<ProjectProposalUpdateToOneWithWhereWithoutProjectInput, ProjectProposalUpdateWithoutProjectInput>, ProjectProposalUncheckedUpdateWithoutProjectInput>
+  export type ProjectProposalUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput> | ProjectProposalCreateWithoutProjectInput[] | ProjectProposalUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput | ProjectProposalCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectProposalUpsertWithWhereUniqueWithoutProjectInput | ProjectProposalUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectProposalCreateManyProjectInputEnvelope
+    set?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    disconnect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    delete?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    update?: ProjectProposalUpdateWithWhereUniqueWithoutProjectInput | ProjectProposalUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectProposalUpdateManyWithWhereWithoutProjectInput | ProjectProposalUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectProposalScalarWhereInput | ProjectProposalScalarWhereInput[]
   }
 
-  export type InvestmentsUncheckedUpdateOneWithoutProjectNestedInput = {
-    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput
-    upsert?: InvestmentsUpsertWithoutProjectInput
-    disconnect?: InvestmentsWhereInput | boolean
-    delete?: InvestmentsWhereInput | boolean
-    connect?: InvestmentsWhereUniqueInput
-    update?: XOR<XOR<InvestmentsUpdateToOneWithWhereWithoutProjectInput, InvestmentsUpdateWithoutProjectInput>, InvestmentsUncheckedUpdateWithoutProjectInput>
+  export type InvestmentsUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput> | InvestmentsCreateWithoutProjectInput[] | InvestmentsUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvestmentsCreateOrConnectWithoutProjectInput | InvestmentsCreateOrConnectWithoutProjectInput[]
+    upsert?: InvestmentsUpsertWithWhereUniqueWithoutProjectInput | InvestmentsUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: InvestmentsCreateManyProjectInputEnvelope
+    set?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    disconnect?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    delete?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    connect?: InvestmentsWhereUniqueInput | InvestmentsWhereUniqueInput[]
+    update?: InvestmentsUpdateWithWhereUniqueWithoutProjectInput | InvestmentsUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: InvestmentsUpdateManyWithWhereWithoutProjectInput | InvestmentsUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: InvestmentsScalarWhereInput | InvestmentsScalarWhereInput[]
   }
 
-  export type ProjectProposalUncheckedUpdateOneWithoutProjectNestedInput = {
-    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput
-    upsert?: ProjectProposalUpsertWithoutProjectInput
-    disconnect?: ProjectProposalWhereInput | boolean
-    delete?: ProjectProposalWhereInput | boolean
-    connect?: ProjectProposalWhereUniqueInput
-    update?: XOR<XOR<ProjectProposalUpdateToOneWithWhereWithoutProjectInput, ProjectProposalUpdateWithoutProjectInput>, ProjectProposalUncheckedUpdateWithoutProjectInput>
+  export type ProjectProposalUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput> | ProjectProposalCreateWithoutProjectInput[] | ProjectProposalUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectProposalCreateOrConnectWithoutProjectInput | ProjectProposalCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectProposalUpsertWithWhereUniqueWithoutProjectInput | ProjectProposalUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectProposalCreateManyProjectInputEnvelope
+    set?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    disconnect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    delete?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    connect?: ProjectProposalWhereUniqueInput | ProjectProposalWhereUniqueInput[]
+    update?: ProjectProposalUpdateWithWhereUniqueWithoutProjectInput | ProjectProposalUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectProposalUpdateManyWithWhereWithoutProjectInput | ProjectProposalUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectProposalScalarWhereInput | ProjectProposalScalarWhereInput[]
   }
 
   export type ProjectsCreateNestedOneWithoutProjectProposalInput = {
@@ -13591,17 +13767,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedUuidNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedEnumAgreementFilter<$PrismaModel = never> = {
     equals?: $Enums.Agreement | EnumAgreementFieldRefInput<$PrismaModel>
     in?: $Enums.Agreement[] | ListEnumAgreementFieldRefInput<$PrismaModel>
@@ -13614,20 +13779,6 @@ export namespace Prisma {
     in?: $Enums.InvestmentStatus[] | ListEnumInvestmentStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.InvestmentStatus[] | ListEnumInvestmentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumInvestmentStatusFilter<$PrismaModel> | $Enums.InvestmentStatus
-  }
-
-  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumAgreementWithAggregatesFilter<$PrismaModel = never> = {
@@ -13650,11 +13801,36 @@ export namespace Prisma {
     _max?: NestedEnumInvestmentStatusFilter<$PrismaModel>
   }
 
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedEnumSolarProjectStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.SolarProjectStatus | EnumSolarProjectStatusFieldRefInput<$PrismaModel>
     in?: $Enums.SolarProjectStatus[] | ListEnumSolarProjectStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.SolarProjectStatus[] | ListEnumSolarProjectStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumSolarProjectStatusFilter<$PrismaModel> | $Enums.SolarProjectStatus
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumSolarProjectStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -13704,13 +13880,13 @@ export namespace Prisma {
   export type LandOwnersCreateWithoutUserInput = {
     id?: string
     document_id: string
-    Lands?: LandsCreateNestedOneWithoutOwnerInput
+    Lands?: LandsCreateNestedManyWithoutOwnerInput
   }
 
   export type LandOwnersUncheckedCreateWithoutUserInput = {
     id?: string
     document_id: string
-    Lands?: LandsUncheckedCreateNestedOneWithoutOwnerInput
+    Lands?: LandsUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type LandOwnersCreateOrConnectWithoutUserInput = {
@@ -13768,13 +13944,13 @@ export namespace Prisma {
   export type LandOwnersUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     document_id?: StringFieldUpdateOperationsInput | string
-    Lands?: LandsUpdateOneWithoutOwnerNestedInput
+    Lands?: LandsUpdateManyWithoutOwnerNestedInput
   }
 
   export type LandOwnersUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     document_id?: StringFieldUpdateOperationsInput | string
-    Lands?: LandsUncheckedUpdateOneWithoutOwnerNestedInput
+    Lands?: LandsUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type CompaniesUpsertWithoutUserInput = {
@@ -13868,8 +14044,8 @@ export namespace Prisma {
     country: string
     created_at?: Date | string
     updated_at?: Date | string
-    Projects?: ProjectsCreateNestedOneWithoutLandInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutLandInput
+    Projects?: ProjectsCreateNestedManyWithoutLandInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutLandInput
   }
 
   export type LandsUncheckedCreateWithoutOwnerInput = {
@@ -13886,13 +14062,18 @@ export namespace Prisma {
     country: string
     created_at?: Date | string
     updated_at?: Date | string
-    Projects?: ProjectsUncheckedCreateNestedOneWithoutLandInput
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutLandInput
+    Projects?: ProjectsUncheckedCreateNestedManyWithoutLandInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutLandInput
   }
 
   export type LandsCreateOrConnectWithoutOwnerInput = {
     where: LandsWhereUniqueInput
     create: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type LandsCreateManyOwnerInputEnvelope = {
+    data: LandsCreateManyOwnerInput | LandsCreateManyOwnerInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutLandOwnerInput = {
@@ -13930,51 +14111,40 @@ export namespace Prisma {
     investor?: InvestorsUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type LandsUpsertWithoutOwnerInput = {
+  export type LandsUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: LandsWhereUniqueInput
     update: XOR<LandsUpdateWithoutOwnerInput, LandsUncheckedUpdateWithoutOwnerInput>
     create: XOR<LandsCreateWithoutOwnerInput, LandsUncheckedCreateWithoutOwnerInput>
-    where?: LandsWhereInput
   }
 
-  export type LandsUpdateToOneWithWhereWithoutOwnerInput = {
-    where?: LandsWhereInput
+  export type LandsUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: LandsWhereUniqueInput
     data: XOR<LandsUpdateWithoutOwnerInput, LandsUncheckedUpdateWithoutOwnerInput>
   }
 
-  export type LandsUpdateWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    availability?: BoolFieldUpdateOperationsInput | boolean
-    street?: StringFieldUpdateOperationsInput | string
-    number?: StringFieldUpdateOperationsInput | string
-    complement?: NullableStringFieldUpdateOperationsInput | string | null
-    district?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    postal_code?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    Projects?: ProjectsUpdateOneWithoutLandNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutLandNestedInput
+  export type LandsUpdateManyWithWhereWithoutOwnerInput = {
+    where: LandsScalarWhereInput
+    data: XOR<LandsUpdateManyMutationInput, LandsUncheckedUpdateManyWithoutOwnerInput>
   }
 
-  export type LandsUncheckedUpdateWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    availability?: BoolFieldUpdateOperationsInput | boolean
-    street?: StringFieldUpdateOperationsInput | string
-    number?: StringFieldUpdateOperationsInput | string
-    complement?: NullableStringFieldUpdateOperationsInput | string | null
-    district?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    postal_code?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    Projects?: ProjectsUncheckedUpdateOneWithoutLandNestedInput
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutLandNestedInput
+  export type LandsScalarWhereInput = {
+    AND?: LandsScalarWhereInput | LandsScalarWhereInput[]
+    OR?: LandsScalarWhereInput[]
+    NOT?: LandsScalarWhereInput | LandsScalarWhereInput[]
+    id?: UuidFilter<"Lands"> | string
+    owner_id?: UuidFilter<"Lands"> | string
+    price?: DecimalFilter<"Lands"> | Decimal | DecimalJsLike | number | string
+    availability?: BoolFilter<"Lands"> | boolean
+    street?: StringFilter<"Lands"> | string
+    number?: StringFilter<"Lands"> | string
+    complement?: StringNullableFilter<"Lands"> | string | null
+    district?: StringNullableFilter<"Lands"> | string | null
+    city?: StringFilter<"Lands"> | string
+    state?: StringFilter<"Lands"> | string
+    postal_code?: StringFilter<"Lands"> | string
+    country?: StringFilter<"Lands"> | string
+    created_at?: DateTimeFilter<"Lands"> | Date | string
+    updated_at?: DateTimeFilter<"Lands"> | Date | string
   }
 
   export type UserCreateWithoutCompanyInput = {
@@ -14017,8 +14187,8 @@ export namespace Prisma {
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
     land: LandsCreateNestedOneWithoutProjectsInput
-    Investments?: InvestmentsCreateNestedOneWithoutProjectInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsCreateNestedManyWithoutProjectInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsUncheckedCreateWithoutCompanyInput = {
@@ -14032,8 +14202,8 @@ export namespace Prisma {
     title: string
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedCreateNestedOneWithoutProjectInput
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsUncheckedCreateNestedManyWithoutProjectInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsCreateOrConnectWithoutCompanyInput = {
@@ -14234,7 +14404,7 @@ export namespace Prisma {
     NOT?: InvestmentsScalarWhereInput | InvestmentsScalarWhereInput[]
     id?: UuidFilter<"Investments"> | string
     project_id?: UuidFilter<"Investments"> | string
-    investor_id?: UuidNullableFilter<"Investments"> | string | null
+    investor_id?: UuidFilter<"Investments"> | string
     value_invested?: DecimalFilter<"Investments"> | Decimal | DecimalJsLike | number | string
     invested_date?: DateTimeFilter<"Investments"> | Date | string
     owner_agree?: EnumAgreementFilter<"Investments"> | $Enums.Agreement
@@ -14272,8 +14442,8 @@ export namespace Prisma {
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
     company?: CompaniesCreateNestedOneWithoutProjectsInput
-    Investments?: InvestmentsCreateNestedOneWithoutProjectInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsCreateNestedManyWithoutProjectInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsUncheckedCreateWithoutLandInput = {
@@ -14287,13 +14457,18 @@ export namespace Prisma {
     title: string
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedCreateNestedOneWithoutProjectInput
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsUncheckedCreateNestedManyWithoutProjectInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsCreateOrConnectWithoutLandInput = {
     where: ProjectsWhereUniqueInput
     create: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput>
+  }
+
+  export type ProjectsCreateManyLandInputEnvelope = {
+    data: ProjectsCreateManyLandInput | ProjectsCreateManyLandInput[]
+    skipDuplicates?: boolean
   }
 
   export type ProjectProposalCreateWithoutLandInput = {
@@ -14315,6 +14490,11 @@ export namespace Prisma {
   export type ProjectProposalCreateOrConnectWithoutLandInput = {
     where: ProjectProposalWhereUniqueInput
     create: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput>
+  }
+
+  export type ProjectProposalCreateManyLandInputEnvelope = {
+    data: ProjectProposalCreateManyLandInput | ProjectProposalCreateManyLandInput[]
+    skipDuplicates?: boolean
   }
 
   export type LandOwnersUpsertWithoutLandsInput = {
@@ -14340,72 +14520,48 @@ export namespace Prisma {
     document_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ProjectsUpsertWithoutLandInput = {
+  export type ProjectsUpsertWithWhereUniqueWithoutLandInput = {
+    where: ProjectsWhereUniqueInput
     update: XOR<ProjectsUpdateWithoutLandInput, ProjectsUncheckedUpdateWithoutLandInput>
     create: XOR<ProjectsCreateWithoutLandInput, ProjectsUncheckedCreateWithoutLandInput>
-    where?: ProjectsWhereInput
   }
 
-  export type ProjectsUpdateToOneWithWhereWithoutLandInput = {
-    where?: ProjectsWhereInput
+  export type ProjectsUpdateWithWhereUniqueWithoutLandInput = {
+    where: ProjectsWhereUniqueInput
     data: XOR<ProjectsUpdateWithoutLandInput, ProjectsUncheckedUpdateWithoutLandInput>
   }
 
-  export type ProjectsUpdateWithoutLandInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    power_kw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    estimated_return?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    status?: EnumSolarProjectStatusFieldUpdateOperationsInput | $Enums.SolarProjectStatus
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    company?: CompaniesUpdateOneWithoutProjectsNestedInput
-    Investments?: InvestmentsUpdateOneWithoutProjectNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutProjectNestedInput
+  export type ProjectsUpdateManyWithWhereWithoutLandInput = {
+    where: ProjectsScalarWhereInput
+    data: XOR<ProjectsUpdateManyMutationInput, ProjectsUncheckedUpdateManyWithoutLandInput>
   }
 
-  export type ProjectsUncheckedUpdateWithoutLandInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    company_id?: NullableStringFieldUpdateOperationsInput | string | null
-    power_kw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    estimated_return?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    status?: EnumSolarProjectStatusFieldUpdateOperationsInput | $Enums.SolarProjectStatus
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedUpdateOneWithoutProjectNestedInput
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutProjectNestedInput
-  }
-
-  export type ProjectProposalUpsertWithoutLandInput = {
+  export type ProjectProposalUpsertWithWhereUniqueWithoutLandInput = {
+    where: ProjectProposalWhereUniqueInput
     update: XOR<ProjectProposalUpdateWithoutLandInput, ProjectProposalUncheckedUpdateWithoutLandInput>
     create: XOR<ProjectProposalCreateWithoutLandInput, ProjectProposalUncheckedCreateWithoutLandInput>
-    where?: ProjectProposalWhereInput
   }
 
-  export type ProjectProposalUpdateToOneWithWhereWithoutLandInput = {
-    where?: ProjectProposalWhereInput
+  export type ProjectProposalUpdateWithWhereUniqueWithoutLandInput = {
+    where: ProjectProposalWhereUniqueInput
     data: XOR<ProjectProposalUpdateWithoutLandInput, ProjectProposalUncheckedUpdateWithoutLandInput>
   }
 
-  export type ProjectProposalUpdateWithoutLandInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
-    project?: ProjectsUpdateOneRequiredWithoutProjectProposalNestedInput
+  export type ProjectProposalUpdateManyWithWhereWithoutLandInput = {
+    where: ProjectProposalScalarWhereInput
+    data: XOR<ProjectProposalUpdateManyMutationInput, ProjectProposalUncheckedUpdateManyWithoutLandInput>
   }
 
-  export type ProjectProposalUncheckedUpdateWithoutLandInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    project_id?: StringFieldUpdateOperationsInput | string
-    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+  export type ProjectProposalScalarWhereInput = {
+    AND?: ProjectProposalScalarWhereInput | ProjectProposalScalarWhereInput[]
+    OR?: ProjectProposalScalarWhereInput[]
+    NOT?: ProjectProposalScalarWhereInput | ProjectProposalScalarWhereInput[]
+    id?: UuidFilter<"ProjectProposal"> | string
+    project_id?: UuidFilter<"ProjectProposal"> | string
+    land_id?: UuidFilter<"ProjectProposal"> | string
+    status?: EnumAgreementStatusFilter<"ProjectProposal"> | $Enums.AgreementStatus
+    created_at?: DateTimeFilter<"ProjectProposal"> | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFilter<"ProjectProposal"> | $Enums.OwnerAgreementStatus
   }
 
   export type ProjectsCreateWithoutInvestmentsInput = {
@@ -14420,7 +14576,7 @@ export namespace Prisma {
     area: Decimal | DecimalJsLike | number | string
     land: LandsCreateNestedOneWithoutProjectsInput
     company?: CompaniesCreateNestedOneWithoutProjectsInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutProjectInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsUncheckedCreateWithoutInvestmentsInput = {
@@ -14435,7 +14591,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutProjectInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsCreateOrConnectWithoutInvestmentsInput = {
@@ -14483,7 +14639,7 @@ export namespace Prisma {
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     land?: LandsUpdateOneRequiredWithoutProjectsNestedInput
     company?: CompaniesUpdateOneWithoutProjectsNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectsUncheckedUpdateWithoutInvestmentsInput = {
@@ -14498,7 +14654,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type InvestorsUpsertWithoutInvestmentsInput = {
@@ -14539,7 +14695,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     owner: LandOwnersCreateNestedOneWithoutLandsInput
-    ProjectProposal?: ProjectProposalCreateNestedOneWithoutLandInput
+    ProjectProposal?: ProjectProposalCreateNestedManyWithoutLandInput
   }
 
   export type LandsUncheckedCreateWithoutProjectsInput = {
@@ -14557,7 +14713,7 @@ export namespace Prisma {
     country: string
     created_at?: Date | string
     updated_at?: Date | string
-    ProjectProposal?: ProjectProposalUncheckedCreateNestedOneWithoutLandInput
+    ProjectProposal?: ProjectProposalUncheckedCreateNestedManyWithoutLandInput
   }
 
   export type LandsCreateOrConnectWithoutProjectsInput = {
@@ -14593,12 +14749,12 @@ export namespace Prisma {
     title?: string | null
     description?: string | null
     status?: $Enums.InvestmentStatus
-    investor?: InvestorsCreateNestedOneWithoutInvestmentsInput
+    investor: InvestorsCreateNestedOneWithoutInvestmentsInput
   }
 
   export type InvestmentsUncheckedCreateWithoutProjectInput = {
     id?: string
-    investor_id?: string | null
+    investor_id: string
     value_invested: Decimal | DecimalJsLike | number | string
     invested_date?: Date | string
     owner_agree?: $Enums.Agreement
@@ -14611,6 +14767,11 @@ export namespace Prisma {
   export type InvestmentsCreateOrConnectWithoutProjectInput = {
     where: InvestmentsWhereUniqueInput
     create: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput>
+  }
+
+  export type InvestmentsCreateManyProjectInputEnvelope = {
+    data: InvestmentsCreateManyProjectInput | InvestmentsCreateManyProjectInput[]
+    skipDuplicates?: boolean
   }
 
   export type ProjectProposalCreateWithoutProjectInput = {
@@ -14632,6 +14793,11 @@ export namespace Prisma {
   export type ProjectProposalCreateOrConnectWithoutProjectInput = {
     where: ProjectProposalWhereUniqueInput
     create: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectProposalCreateManyProjectInputEnvelope = {
+    data: ProjectProposalCreateManyProjectInput | ProjectProposalCreateManyProjectInput[]
+    skipDuplicates?: boolean
   }
 
   export type LandsUpsertWithoutProjectsInput = {
@@ -14660,7 +14826,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: LandOwnersUpdateOneRequiredWithoutLandsNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutLandNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutLandNestedInput
   }
 
   export type LandsUncheckedUpdateWithoutProjectsInput = {
@@ -14678,7 +14844,7 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutLandNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutLandNestedInput
   }
 
   export type CompaniesUpsertWithoutProjectsInput = {
@@ -14706,66 +14872,36 @@ export namespace Prisma {
     company_name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type InvestmentsUpsertWithoutProjectInput = {
+  export type InvestmentsUpsertWithWhereUniqueWithoutProjectInput = {
+    where: InvestmentsWhereUniqueInput
     update: XOR<InvestmentsUpdateWithoutProjectInput, InvestmentsUncheckedUpdateWithoutProjectInput>
     create: XOR<InvestmentsCreateWithoutProjectInput, InvestmentsUncheckedCreateWithoutProjectInput>
-    where?: InvestmentsWhereInput
   }
 
-  export type InvestmentsUpdateToOneWithWhereWithoutProjectInput = {
-    where?: InvestmentsWhereInput
+  export type InvestmentsUpdateWithWhereUniqueWithoutProjectInput = {
+    where: InvestmentsWhereUniqueInput
     data: XOR<InvestmentsUpdateWithoutProjectInput, InvestmentsUncheckedUpdateWithoutProjectInput>
   }
 
-  export type InvestmentsUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
-    company_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
-    investor?: InvestorsUpdateOneWithoutInvestmentsNestedInput
+  export type InvestmentsUpdateManyWithWhereWithoutProjectInput = {
+    where: InvestmentsScalarWhereInput
+    data: XOR<InvestmentsUpdateManyMutationInput, InvestmentsUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type InvestmentsUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    investor_id?: NullableStringFieldUpdateOperationsInput | string | null
-    value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
-    company_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
-  }
-
-  export type ProjectProposalUpsertWithoutProjectInput = {
+  export type ProjectProposalUpsertWithWhereUniqueWithoutProjectInput = {
+    where: ProjectProposalWhereUniqueInput
     update: XOR<ProjectProposalUpdateWithoutProjectInput, ProjectProposalUncheckedUpdateWithoutProjectInput>
     create: XOR<ProjectProposalCreateWithoutProjectInput, ProjectProposalUncheckedCreateWithoutProjectInput>
-    where?: ProjectProposalWhereInput
   }
 
-  export type ProjectProposalUpdateToOneWithWhereWithoutProjectInput = {
-    where?: ProjectProposalWhereInput
+  export type ProjectProposalUpdateWithWhereUniqueWithoutProjectInput = {
+    where: ProjectProposalWhereUniqueInput
     data: XOR<ProjectProposalUpdateWithoutProjectInput, ProjectProposalUncheckedUpdateWithoutProjectInput>
   }
 
-  export type ProjectProposalUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
-    land?: LandsUpdateOneRequiredWithoutProjectProposalNestedInput
-  }
-
-  export type ProjectProposalUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    land_id?: StringFieldUpdateOperationsInput | string
-    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+  export type ProjectProposalUpdateManyWithWhereWithoutProjectInput = {
+    where: ProjectProposalScalarWhereInput
+    data: XOR<ProjectProposalUpdateManyMutationInput, ProjectProposalUncheckedUpdateManyWithoutProjectInput>
   }
 
   export type ProjectsCreateWithoutProjectProposalInput = {
@@ -14780,7 +14916,7 @@ export namespace Prisma {
     area: Decimal | DecimalJsLike | number | string
     land: LandsCreateNestedOneWithoutProjectsInput
     company?: CompaniesCreateNestedOneWithoutProjectsInput
-    Investments?: InvestmentsCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsUncheckedCreateWithoutProjectProposalInput = {
@@ -14795,7 +14931,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     area: Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedCreateNestedOneWithoutProjectInput
+    Investments?: InvestmentsUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectsCreateOrConnectWithoutProjectProposalInput = {
@@ -14818,7 +14954,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     owner: LandOwnersCreateNestedOneWithoutLandsInput
-    Projects?: ProjectsCreateNestedOneWithoutLandInput
+    Projects?: ProjectsCreateNestedManyWithoutLandInput
   }
 
   export type LandsUncheckedCreateWithoutProjectProposalInput = {
@@ -14836,7 +14972,7 @@ export namespace Prisma {
     country: string
     created_at?: Date | string
     updated_at?: Date | string
-    Projects?: ProjectsUncheckedCreateNestedOneWithoutLandInput
+    Projects?: ProjectsUncheckedCreateNestedManyWithoutLandInput
   }
 
   export type LandsCreateOrConnectWithoutProjectProposalInput = {
@@ -14867,7 +15003,7 @@ export namespace Prisma {
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     land?: LandsUpdateOneRequiredWithoutProjectsNestedInput
     company?: CompaniesUpdateOneWithoutProjectsNestedInput
-    Investments?: InvestmentsUpdateOneWithoutProjectNestedInput
+    Investments?: InvestmentsUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectsUncheckedUpdateWithoutProjectProposalInput = {
@@ -14882,7 +15018,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedUpdateOneWithoutProjectNestedInput
+    Investments?: InvestmentsUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type LandsUpsertWithoutProjectProposalInput = {
@@ -14911,7 +15047,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: LandOwnersUpdateOneRequiredWithoutLandsNestedInput
-    Projects?: ProjectsUpdateOneWithoutLandNestedInput
+    Projects?: ProjectsUpdateManyWithoutLandNestedInput
   }
 
   export type LandsUncheckedUpdateWithoutProjectProposalInput = {
@@ -14929,7 +15065,75 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    Projects?: ProjectsUncheckedUpdateOneWithoutLandNestedInput
+    Projects?: ProjectsUncheckedUpdateManyWithoutLandNestedInput
+  }
+
+  export type LandsCreateManyOwnerInput = {
+    id?: string
+    price: Decimal | DecimalJsLike | number | string
+    availability?: boolean
+    street: string
+    number: string
+    complement?: string | null
+    district?: string | null
+    city: string
+    state: string
+    postal_code: string
+    country: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type LandsUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    availability?: BoolFieldUpdateOperationsInput | boolean
+    street?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    complement?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postal_code?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    Projects?: ProjectsUpdateManyWithoutLandNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutLandNestedInput
+  }
+
+  export type LandsUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    availability?: BoolFieldUpdateOperationsInput | boolean
+    street?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    complement?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postal_code?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    Projects?: ProjectsUncheckedUpdateManyWithoutLandNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutLandNestedInput
+  }
+
+  export type LandsUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    availability?: BoolFieldUpdateOperationsInput | boolean
+    street?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    complement?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postal_code?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectsCreateManyCompanyInput = {
@@ -14956,8 +15160,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     land?: LandsUpdateOneRequiredWithoutProjectsNestedInput
-    Investments?: InvestmentsUpdateOneWithoutProjectNestedInput
-    ProjectProposal?: ProjectProposalUpdateOneWithoutProjectNestedInput
+    Investments?: InvestmentsUpdateManyWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectsUncheckedUpdateWithoutCompanyInput = {
@@ -14971,8 +15175,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    Investments?: InvestmentsUncheckedUpdateOneWithoutProjectNestedInput
-    ProjectProposal?: ProjectProposalUncheckedUpdateOneWithoutProjectNestedInput
+    Investments?: InvestmentsUncheckedUpdateManyWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectsUncheckedUpdateManyWithoutCompanyInput = {
@@ -15034,6 +15238,174 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
+  }
+
+  export type ProjectsCreateManyLandInput = {
+    id?: string
+    company_id?: string | null
+    power_kw: Decimal | DecimalJsLike | number | string
+    cost: Decimal | DecimalJsLike | number | string
+    estimated_return: Decimal | DecimalJsLike | number | string
+    status?: $Enums.SolarProjectStatus
+    created_at?: Date | string
+    title: string
+    description?: string | null
+    area: Decimal | DecimalJsLike | number | string
+  }
+
+  export type ProjectProposalCreateManyLandInput = {
+    id?: string
+    project_id: string
+    status?: $Enums.AgreementStatus
+    created_at?: Date | string
+    owner_agreed?: $Enums.OwnerAgreementStatus
+  }
+
+  export type ProjectsUpdateWithoutLandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    power_kw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estimated_return?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumSolarProjectStatusFieldUpdateOperationsInput | $Enums.SolarProjectStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    company?: CompaniesUpdateOneWithoutProjectsNestedInput
+    Investments?: InvestmentsUpdateManyWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectsUncheckedUpdateWithoutLandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    company_id?: NullableStringFieldUpdateOperationsInput | string | null
+    power_kw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estimated_return?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumSolarProjectStatusFieldUpdateOperationsInput | $Enums.SolarProjectStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Investments?: InvestmentsUncheckedUpdateManyWithoutProjectNestedInput
+    ProjectProposal?: ProjectProposalUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectsUncheckedUpdateManyWithoutLandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    company_id?: NullableStringFieldUpdateOperationsInput | string | null
+    power_kw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cost?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estimated_return?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumSolarProjectStatusFieldUpdateOperationsInput | $Enums.SolarProjectStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    area?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type ProjectProposalUpdateWithoutLandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+    project?: ProjectsUpdateOneRequiredWithoutProjectProposalNestedInput
+  }
+
+  export type ProjectProposalUncheckedUpdateWithoutLandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    project_id?: StringFieldUpdateOperationsInput | string
+    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+  }
+
+  export type ProjectProposalUncheckedUpdateManyWithoutLandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    project_id?: StringFieldUpdateOperationsInput | string
+    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+  }
+
+  export type InvestmentsCreateManyProjectInput = {
+    id?: string
+    investor_id: string
+    value_invested: Decimal | DecimalJsLike | number | string
+    invested_date?: Date | string
+    owner_agree?: $Enums.Agreement
+    company_agree?: $Enums.Agreement
+    title?: string | null
+    description?: string | null
+    status?: $Enums.InvestmentStatus
+  }
+
+  export type ProjectProposalCreateManyProjectInput = {
+    id?: string
+    land_id: string
+    status?: $Enums.AgreementStatus
+    created_at?: Date | string
+    owner_agreed?: $Enums.OwnerAgreementStatus
+  }
+
+  export type InvestmentsUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
+    company_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
+    investor?: InvestorsUpdateOneRequiredWithoutInvestmentsNestedInput
+  }
+
+  export type InvestmentsUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    investor_id?: StringFieldUpdateOperationsInput | string
+    value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
+    company_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
+  }
+
+  export type InvestmentsUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    investor_id?: StringFieldUpdateOperationsInput | string
+    value_invested?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    invested_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
+    company_agree?: EnumAgreementFieldUpdateOperationsInput | $Enums.Agreement
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvestmentStatusFieldUpdateOperationsInput | $Enums.InvestmentStatus
+  }
+
+  export type ProjectProposalUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+    land?: LandsUpdateOneRequiredWithoutProjectProposalNestedInput
+  }
+
+  export type ProjectProposalUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    land_id?: StringFieldUpdateOperationsInput | string
+    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
+  }
+
+  export type ProjectProposalUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    land_id?: StringFieldUpdateOperationsInput | string
+    status?: EnumAgreementStatusFieldUpdateOperationsInput | $Enums.AgreementStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner_agreed?: EnumOwnerAgreementStatusFieldUpdateOperationsInput | $Enums.OwnerAgreementStatus
   }
 
 

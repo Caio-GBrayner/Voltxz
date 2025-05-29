@@ -2,6 +2,7 @@ import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsUUID()
+  @IsNotEmpty()
   user_id!: string;
 
   @IsString()

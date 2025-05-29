@@ -11,7 +11,7 @@ export class CreateLandDto {
   owner_id: string;
 
   @IsDecimal({ decimal_digits: '2' })
-  price: number;
+  price: string;
 
   @IsString()
   @IsNotEmpty()
@@ -43,7 +43,7 @@ export class CreateLandDto {
 
   constructor(
     owner_id: string,
-    price: number,
+    price: string,
     street: string,
     city: string,
     state: string,

@@ -81,7 +81,7 @@ CREATE TABLE "lands" (
 CREATE TABLE "investments" (
     "id" UUID NOT NULL,
     "project_id" UUID NOT NULL,
-    "investor_id" UUID,
+    "investor_id" UUID NOT NULL,
     "value_invested" DECIMAL(15,2) NOT NULL,
     "invested_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "owner_agree" "Agreement" NOT NULL DEFAULT 'pending',
@@ -140,21 +140,6 @@ CREATE UNIQUE INDEX "investors_user_id_key" ON "investors"("user_id");
 -- CreateIndex
 CREATE UNIQUE INDEX "investors_document_id_key" ON "investors"("document_id");
 
--- CreateIndex
-CREATE UNIQUE INDEX "lands_owner_id_key" ON "lands"("owner_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "investments_project_id_key" ON "investments"("project_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "projects_land_id_key" ON "projects"("land_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "project_proposal_project_id_key" ON "project_proposal"("project_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "project_proposal_land_id_key" ON "project_proposal"("land_id");
-
 -- AddForeignKey
 ALTER TABLE "land_owners" ADD CONSTRAINT "land_owners_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -171,7 +156,7 @@ ALTER TABLE "lands" ADD CONSTRAINT "lands_owner_id_fkey" FOREIGN KEY ("owner_id"
 ALTER TABLE "investments" ADD CONSTRAINT "investments_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "projects"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "investments" ADD CONSTRAINT "investments_investor_id_fkey" FOREIGN KEY ("investor_id") REFERENCES "investors"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "investments" ADD CONSTRAINT "investments_investor_id_fkey" FOREIGN KEY ("investor_id") REFERENCES "investors"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "projects" ADD CONSTRAINT "projects_land_id_fkey" FOREIGN KEY ("land_id") REFERENCES "lands"("id") ON DELETE CASCADE ON UPDATE CASCADE;

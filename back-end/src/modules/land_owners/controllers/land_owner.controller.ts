@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { LandOwnerService } from '../services/land_owner.service';
 import { CreateLandOwnerDto } from '../dto/create-land_owner';
 import { UpdateLandOwnerDto } from '../dto/update-land_owner';
@@ -28,5 +36,10 @@ export class LandOwnerController {
     @Body() updateLandOwnerDto: UpdateLandOwnerDto,
   ) {
     return this.landOwnerService.update(id, updateLandOwnerDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.landOwnerService.remove(id);
   }
 }

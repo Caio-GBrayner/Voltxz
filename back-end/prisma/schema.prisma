@@ -31,16 +31,16 @@ model User {
   @@map("users")
 }
 
-model LandOwners {
-  id         String @id @default(uuid()) @db.Uuid
-  user_id    String @unique @db.Uuid
-  user       User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  document_id String
+  model LandOwners {
+    id         String @id @default(uuid()) @db.Uuid
+    user_id    String @unique @db.Uuid
+    user       User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    document_id String
 
-  Lands Lands?
+    Lands Lands[]
 
-  @@map("land_owners")
-}
+    @@map("land_owners")
+  }
 
 model Companies {
   id           String @id @default(uuid()) @db.Uuid
@@ -68,7 +68,7 @@ model Investors{
 
 model Lands {
   id           String    @id @default(uuid()) @db.Uuid
-  owner_id     String    @unique @db.Uuid
+  owner_id     String    @db.Uuid
   owner        LandOwners @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   price        Decimal     @db.Decimal(10, 2)
   availability Boolean   @default(true)
@@ -83,18 +83,18 @@ model Lands {
   created_at   DateTime  @default(now()) @map("created_at")
   updated_at   DateTime  @updatedAt @map("updated_at")
 
-  Projects Projects?
-  ProjectProposal ProjectProposal?
+  Projects Projects[]
+  ProjectProposal ProjectProposal[]
 
   @@map("lands")
 }
 
 model Investments {
   id             String      @id @default(uuid()) @db.Uuid
-  project_id     String      @unique @db.Uuid
+  project_id     String       @db.Uuid
   project        Projects     @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  investor_id    String?     @db.Uuid
-  investor       Investors?  @relation(fields: [investor_id], references: [id], onDelete: SetNull)
+  investor_id    String     @db.Uuid
+  investor       Investors    @relation(fields: [investor_id], references: [id], onDelete: Cascade)
   value_invested Decimal       @db.Decimal(15, 2)
   invested_date  DateTime    @default(now()) @map("invested_date")
   owner_agree    Agreement   @default(pending)
@@ -108,7 +108,7 @@ model Investments {
 
 model Projects {
   id              String           @id @default(uuid()) @db.Uuid
-  land_id         String           @unique @db.Uuid
+  land_id         String            @db.Uuid
   land            Lands             @relation(fields: [land_id], references: [id], onDelete: Cascade)
  company_id      String?     @db.Uuid
   company         Companies?  @relation(fields: [company_id], references: [id], onDelete: SetNull)
@@ -121,17 +121,17 @@ model Projects {
   description     String?
   area            Decimal            @db.Decimal(10, 2)
 
-  Investments Investments?
-  ProjectProposal ProjectProposal?
+  Investments Investments[]
+  ProjectProposal ProjectProposal[]
 
   @@map("projects")
 }
 
 model ProjectProposal {
   id           String             @id @default(uuid()) @db.Uuid
-  project_id   String             @unique @db.Uuid
+  project_id   String              @db.Uuid
   project      Projects            @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  land_id      String             @unique @db.Uuid
+  land_id      String              @db.Uuid
   land         Lands               @relation(fields: [land_id], references: [id], onDelete: Cascade)
   status       AgreementStatus    @default(pending)
   created_at   DateTime           @default(now()) @map("created_at")
