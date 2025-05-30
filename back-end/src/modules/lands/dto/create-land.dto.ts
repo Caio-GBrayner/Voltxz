@@ -4,6 +4,7 @@ import {
   IsString,
   IsUUID,
   IsOptional,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreateLandDto {
@@ -13,9 +14,25 @@ export class CreateLandDto {
   @IsDecimal({ decimal_digits: '2' })
   price: string;
 
+  @IsBoolean()
+  @IsOptional()
+  availability?: boolean;
+
   @IsString()
   @IsNotEmpty()
   street: string;
+
+  @IsString()
+  @IsNotEmpty()
+  number: string;
+
+  @IsString()
+  @IsOptional()
+  complement?: string;
+
+  @IsString()
+  @IsOptional()
+  district?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -27,19 +44,11 @@ export class CreateLandDto {
 
   @IsString()
   @IsNotEmpty()
-  number: string;
-
-  @IsString()
-  @IsNotEmpty()
   postal_code: string;
 
   @IsString()
   @IsNotEmpty()
   country: string;
-
-  @IsString()
-  @IsOptional()
-  complement?: string;
 
   constructor(
     owner_id: string,
