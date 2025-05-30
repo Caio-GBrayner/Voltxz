@@ -28,4 +28,20 @@ export class LandsService {
       data: updateLandDto,
     });
   }
+
+  async remove(id: string) {
+    return this.prisma.lands.delete({
+      where: { id },
+    });
+  }
+
+  async findOne(id: string) {
+    return this.prisma.lands.findUnique({
+      where: { id },
+    });
+  }
+
+  findAll() {
+    return this.prisma.lands.findMany();
+  }
 }
