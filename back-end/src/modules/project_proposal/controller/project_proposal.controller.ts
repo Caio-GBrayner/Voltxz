@@ -11,7 +11,7 @@ import { ProjectProposalService } from '../service/project_proposal.service';
 import { CreateProjectProposalDto } from '../dto/create-project_proposal.dto';
 import { UpdateProjectProposalDto } from '../dto/update-project_proposal.dto';
 
-@Controller('project-proposals')
+@Controller('api/project-proposals')
 export class ProjectProposalController {
   constructor(private readonly service: ProjectProposalService) {}
 

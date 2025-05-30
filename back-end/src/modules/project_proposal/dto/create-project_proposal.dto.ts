@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsUUID } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsUUID } from 'class-validator';
 import { OwnerAgreementStatus } from 'generated/prisma';
 import { AgreementStatus } from 'generated/prisma';
 
@@ -12,10 +12,6 @@ export class CreateProjectProposalDto {
   @IsEnum(AgreementStatus)
   @IsNotEmpty()
   status!: AgreementStatus;
-
-  @IsDateString()
-  @IsNotEmpty()
-  created_at!: Date;
 
   @IsEnum(OwnerAgreementStatus)
   @IsNotEmpty()
