@@ -1,5 +1,4 @@
 import {
-  IsDateString,
   IsDecimal,
   IsEnum,
   IsNotEmpty,
@@ -19,10 +18,6 @@ export class CreateInvestmentDto {
   @IsNotEmpty()
   @IsDecimal()
   value_invested!: number;
-
-  @IsNotEmpty()
-  @IsDateString()
-  invested_date!: Date;
 
   @IsEnum(Agreement)
   @IsNotEmpty()
