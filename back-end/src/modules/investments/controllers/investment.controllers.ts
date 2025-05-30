@@ -1,4 +1,12 @@
-import { Controller, Get, Delete, Patch, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Delete,
+  Patch,
+  Post,
+  Param,
+  Body,
+} from '@nestjs/common';
 import { InvestmentService } from '../services/investment.service';
 import { CreateInvestmentDto } from '../dto/create-investments.dto';
 import { UpdateInvestmentDto } from '../dto/update-investments.dto';
@@ -8,7 +16,7 @@ export class InvestmentController {
   constructor(private readonly investmentService: InvestmentService) {}
 
   @Post()
-  async create(createInvestmentDto: CreateInvestmentDto) {
+  async create(@Body() createInvestmentDto: CreateInvestmentDto) {
     return this.investmentService.create(createInvestmentDto);
   }
   @Get()
@@ -17,17 +25,20 @@ export class InvestmentController {
   }
 
   @Get(':id')
-  async findOne(id: string) {
+  async findOne(@Param('id') id: string) {
     return this.investmentService.findOne(id);
   }
 
   @Patch(':id')
-  async update(id: string, updateInvestmentDto: UpdateInvestmentDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateInvestmentDto: UpdateInvestmentDto,
+  ) {
     return this.investmentService.update(id, updateInvestmentDto);
   }
 
   @Delete(':id')
-  async remove(id: string) {
+  async remove(@Param('id') id: string) {
     return this.investmentService.remove(id);
   }
 }
