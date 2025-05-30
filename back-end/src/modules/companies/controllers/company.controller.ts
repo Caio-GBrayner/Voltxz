@@ -6,18 +6,25 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CompanyService } from '../services/company.service';
 import { CreateCompanyDto } from '../dto/create-company.dto';
 import { UpdateCompanyDto } from '../dto/update-company.dto';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UserId } from 'src/decorators/current-user.decorator';
 
 @Controller('api/companies')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
   @Post()
-  create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyService.create(createCompanyDto);
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createCompanyDto: CreateCompanyDto, @UserId() userId: string) {
+    if (!userId) {
+      throw new Error('User ID is required to create a company');
+    }
+    return this.companyService.create(createCompanyDto, userId);
   }
 
   @Patch(':id')

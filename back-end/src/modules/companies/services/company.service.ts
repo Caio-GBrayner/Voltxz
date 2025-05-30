@@ -7,9 +7,18 @@ import { UpdateCompanyDto } from 'src/modules/companies/dto/update-company.dto';
 export class CompanyService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createCompanyDto: CreateCompanyDto) {
+  async create(createCompanyDto: CreateCompanyDto, userId: string) {
+    const existingCompany = await this.prisma.companies.findUnique({
+      where: { user_id: userId },
+    });
+    if (existingCompany) {
+      throw new Error('User is already a company owner');
+    }
     return this.prisma.companies.create({
-      data: createCompanyDto,
+      data: {
+        ...createCompanyDto,
+        user_id: userId,
+      },
     });
   }
 

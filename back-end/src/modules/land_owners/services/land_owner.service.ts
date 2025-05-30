@@ -7,9 +7,19 @@ import { UpdateLandOwnerDto } from '../dto/update-land_owner';
 export class LandOwnerService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createLandOwnerDto: CreateLandOwnerDto) {
+  async create(createLandOwnerDto: CreateLandOwnerDto, userId: string) {
+    const existingLandOwner = await this.prisma.landOwners.findUnique({
+      where: { user_id: userId },
+    });
+
+    if (existingLandOwner) {
+      throw new Error('User is already a land owner');
+    }
     return this.prisma.landOwners.create({
-      data: createLandOwnerDto,
+      data: {
+        ...createLandOwnerDto,
+        user_id: userId,
+      },
     });
   }
 

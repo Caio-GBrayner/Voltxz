@@ -6,18 +6,28 @@ import {
   Param,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { LandOwnerService } from '../services/land_owner.service';
 import { CreateLandOwnerDto } from '../dto/create-land_owner';
 import { UpdateLandOwnerDto } from '../dto/update-land_owner';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UserId } from 'src/decorators/current-user.decorator'; // Importa o decorator para obter o user_id
 
 @Controller('api/land-owners')
 export class LandOwnerController {
   constructor(private landOwnerService: LandOwnerService) {}
 
   @Post()
-  create(@Body() createLandOwnerDto: CreateLandOwnerDto) {
-    return this.landOwnerService.create(createLandOwnerDto);
+  @UseGuards(JwtAuthGuard)
+  async create(
+    @Body() createLandOwnerDto: CreateLandOwnerDto,
+    @UserId() userId: string,
+  ) {
+    if (!userId) {
+      throw new Error('User ID is required to create a land owner');
+    }
+    return this.landOwnerService.create(createLandOwnerDto, userId);
   }
 
   @Get()

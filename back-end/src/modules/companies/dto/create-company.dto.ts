@@ -1,10 +1,6 @@
-import { IsString, IsNotEmpty, IsUUID } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateCompanyDto {
-  @IsUUID()
-  @IsNotEmpty()
-  user_id!: string;
-
   @IsString()
   @IsNotEmpty()
   document_id!: string;
