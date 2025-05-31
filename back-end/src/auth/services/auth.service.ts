@@ -31,17 +31,10 @@ export class AuthService {
       },
     });
 
-    // if (registerDto.user_type === UserType.land_owner) {
-    //   await this.prisma.landOwners.create({
-    //     data: {
-    //       user_id: user.id,
-    //       document_id: 'DOC-123',
-    //     },
-    //   });
-    // }
+    const payload = { sub: user.id, email: user.email, type: user.user_type };
 
     return {
-      access_token: this.jwtService.sign({ sub: user.id, email: user.email }),
+      access_token: this.jwtService.sign(payload),
     };
   }
 
@@ -52,8 +45,10 @@ export class AuthService {
       throw new Error('Credenciais inválidas');
     }
 
+    const payload = { sub: user.id, email: user.email, type: user.user_type }; // 'type' para consistência com JwtStrategy
+
     return {
-      access_token: this.jwtService.sign({ sub: user.id, email: user.email }),
+      access_token: this.jwtService.sign(payload),
       user_type: user.user_type,
     };
   }
