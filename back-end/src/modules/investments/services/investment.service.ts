@@ -83,7 +83,7 @@ export class InvestmentService {
         investor: {
           select: {
             id: true,
-            user: { select: { email: true, type: true, full_name: true } },
+            user: { select: { email: true, user_type: true, name: true } },
           },
         },
         project: {
@@ -127,43 +127,43 @@ export class InvestmentService {
       );
     }
 
-    let isAuthorized = false;
     let fieldToUpdate: 'owner_agree' | 'company_agree';
+    let alreadyRespondedError: string | null = null;
 
     if (userType === 'LandOwner') {
       const landOwner = await this.prisma.landOwners.findUnique({
         where: { user_id: userId },
         select: { id: true },
       });
-      if (landOwner && landOwner.id === investment.project.land.owner_id) {
-        isAuthorized = true;
-        fieldToUpdate = 'owner_agree';
-        if (investment.owner_agree !== Agreement.pending) {
-          throw new BadRequestException(
-            `Land Owner has already responded (${investment.owner_agree}).`,
-          );
-        }
+      if (!landOwner || landOwner.id !== investment.project.land.owner_id) {
+        throw new BadRequestException(
+          'You are not authorized to respond to this investment as a Land Owner.',
+        );
+      }
+      fieldToUpdate = 'owner_agree';
+      if (investment.owner_agree !== Agreement.pending) {
+        alreadyRespondedError = `Land Owner has already responded (${investment.owner_agree}).`;
       }
     } else if (userType === 'Company') {
       const company = await this.prisma.companies.findUnique({
         where: { user_id: userId },
         select: { id: true },
       });
-      if (company && company.id === investment.project.company_id) {
-        isAuthorized = true;
-        fieldToUpdate = 'company_agree';
-        if (investment.company_agree !== Agreement.pending) {
-          throw new BadRequestException(
-            `Company has already responded (${investment.company_agree}).`,
-          );
-        }
+      if (!company || company.id !== investment.project.company_id) {
+        throw new BadRequestException(
+          'You are not authorized to respond to this investment as a Company.',
+        );
       }
+      fieldToUpdate = 'company_agree';
+      if (investment.company_agree !== Agreement.pending) {
+        alreadyRespondedError = `Company has already responded (${investment.company_agree}).`;
+      }
+    } else {
+      throw new BadRequestException(`Invalid user type: ${String(userType)}`);
     }
 
-    if (!isAuthorized) {
-      throw new BadRequestException(
-        `You are not authorized to respond to this investment as a ${userType}.`,
-      );
+    if (alreadyRespondedError) {
+      throw new BadRequestException(alreadyRespondedError);
     }
 
     const newAgreementStatus =
