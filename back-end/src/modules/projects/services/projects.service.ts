@@ -6,12 +6,22 @@ import { UpdateProjectDto } from '../dto/update-project.dto';
 @Injectable()
 export class ProjectService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(createProjectDto: CreateProjectDto) {
+  async create(createProjectDto: CreateProjectDto, userId: string) {
+    const company = await this.prisma.companies.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+    if (!company) {
+      throw new Error('User is not registered as a company.');
+    }
     return await this.prisma.projects.create({
-      data: createProjectDto,
+      data: {
+        ...createProjectDto,
+        company_id: company.id,
+        status: 'pendingApproval',
+      },
     });
   }
-
   async findAll() {
     return await this.prisma.projects.findMany();
   }

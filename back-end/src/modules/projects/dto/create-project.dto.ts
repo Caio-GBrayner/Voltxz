@@ -1,37 +1,26 @@
 import {
-  IsUUID,
-  IsEnum,
-  IsString,
   IsDecimal,
   IsNotEmpty,
+  IsString,
   IsOptional,
+  IsUUID,
 } from 'class-validator';
-import { SolarProjectStatus } from 'generated/prisma';
 
 export class CreateProjectDto {
   @IsUUID()
-  @IsNotEmpty()
   land_id!: string;
 
-  @IsUUID()
-  @IsOptional()
-  company_id?: string;
-
-  @IsDecimal()
+  @IsDecimal({ decimal_digits: '2' })
   @IsNotEmpty()
-  power_kw!: number;
+  power_kw!: string;
 
-  @IsDecimal()
+  @IsDecimal({ decimal_digits: '2' })
   @IsNotEmpty()
-  cost!: number;
+  cost!: string;
 
-  @IsDecimal()
+  @IsDecimal({ decimal_digits: '2' })
   @IsNotEmpty()
-  estimated_return!: number;
-
-  @IsEnum(SolarProjectStatus)
-  @IsNotEmpty()
-  status!: SolarProjectStatus;
+  estimated_return!: string;
 
   @IsString()
   @IsNotEmpty()
@@ -41,7 +30,7 @@ export class CreateProjectDto {
   @IsOptional()
   description?: string;
 
-  @IsDecimal()
+  @IsDecimal({ decimal_digits: '2' })
   @IsNotEmpty()
-  area!: number;
+  area!: string;
 }
