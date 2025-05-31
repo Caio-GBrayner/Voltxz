@@ -15,6 +15,7 @@ import { UserId } from 'src/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('/api/investors')
+@UseGuards(JwtAuthGuard)
 export class InvestorController {
   constructor(private readonly investorService: InvestorService) {}
 
@@ -29,7 +30,6 @@ export class InvestorController {
   }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createInvestorDto: CreateInvestorDto,
     @UserId() userId: string,

@@ -74,7 +74,7 @@ export class InvestmentController {
         'Invalid response. Must be "accept" or "reject".',
       );
     }
-    if (userType !== 'LandOwner') {
+    if (userType !== 'land_owner') {
       throw new BadRequestException(
         'Only Land Owners can respond to this offer via this endpoint.',
       );
@@ -104,7 +104,7 @@ export class InvestmentController {
         'Invalid response. Must be "accept" or "reject".',
       );
     }
-    if (userType !== 'Company') {
+    if (userType !== 'company') {
       throw new BadRequestException(
         'Only Companies can respond to this offer via this endpoint.',
       );
