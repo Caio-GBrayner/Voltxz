@@ -155,6 +155,7 @@ enum SolarProjectStatus {
   pendingApproval @map("pending_approval")
   active          @map("active")
   completed       @map("completed")
+  rejected        @map("rejected")
 }
 
 enum Agreement {

@@ -5,7 +5,7 @@ CREATE TYPE "AgreementStatus" AS ENUM ('pending', 'accepted', 'rejected');
 CREATE TYPE "OwnerAgreementStatus" AS ENUM ('pending', 'accepted', 'rejected');
 
 -- CreateEnum
-CREATE TYPE "SolarProjectStatus" AS ENUM ('pending_approval', 'active', 'completed');
+CREATE TYPE "SolarProjectStatus" AS ENUM ('pending_approval', 'active', 'completed', 'rejected');
 
 -- CreateEnum
 CREATE TYPE "Agreement" AS ENUM ('pending', 'accepted', 'rejected');

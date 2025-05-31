@@ -79,7 +79,8 @@ export type OwnerAgreementStatus = (typeof OwnerAgreementStatus)[keyof typeof Ow
 export const SolarProjectStatus: {
   pendingApproval: 'pendingApproval',
   active: 'active',
-  completed: 'completed'
+  completed: 'completed',
+  rejected: 'rejected'
 };
 
 export type SolarProjectStatus = (typeof SolarProjectStatus)[keyof typeof SolarProjectStatus]

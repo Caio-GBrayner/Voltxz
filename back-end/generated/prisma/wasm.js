@@ -234,7 +234,8 @@ exports.InvestmentStatus = exports.$Enums.InvestmentStatus = {
 exports.SolarProjectStatus = exports.$Enums.SolarProjectStatus = {
   pendingApproval: 'pendingApproval',
   active: 'active',
-  completed: 'completed'
+  completed: 'completed',
+  rejected: 'rejected'
 };
 
 exports.AgreementStatus = exports.$Enums.AgreementStatus = {
