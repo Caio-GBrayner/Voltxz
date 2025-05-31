@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RegisterDto } from 'src/auth/dto/register.dto';
-// import { UserType } from 'generated/prisma';
 
 @Injectable()
 export class AuthService {
@@ -45,7 +44,7 @@ export class AuthService {
       throw new Error('Credenciais inválidas');
     }
 
-    const payload = { sub: user.id, email: user.email, type: user.user_type }; // 'type' para consistência com JwtStrategy
+    const payload = { sub: user.id, email: user.email, type: user.user_type };
 
     return {
       access_token: this.jwtService.sign(payload),

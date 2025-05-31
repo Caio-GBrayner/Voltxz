@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateLandOwnerDto } from '../dto/create-land_owner';
 import { UpdateLandOwnerDto } from '../dto/update-land_owner';
@@ -43,6 +43,26 @@ export class LandOwnerService {
   async remove(id: string) {
     return this.prisma.landOwners.delete({
       where: { id },
+    });
+  }
+
+  async findLandsByOwnerId(userId: string) {
+    const landOwner = await this.prisma.landOwners.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!landOwner) {
+      throw new NotFoundException(
+        'Land Owner profile not found for this user.',
+      );
+    }
+
+    return this.prisma.lands.findMany({
+      where: {
+        owner_id: landOwner.id,
+      },
+      include: {},
     });
   }
 }

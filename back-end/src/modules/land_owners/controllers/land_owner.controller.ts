@@ -7,27 +7,45 @@ import {
   Patch,
   Delete,
   UseGuards,
+  BadRequestException,
+  Req,
 } from '@nestjs/common';
 import { LandOwnerService } from '../services/land_owner.service';
 import { CreateLandOwnerDto } from '../dto/create-land_owner';
 import { UpdateLandOwnerDto } from '../dto/update-land_owner';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { UserId } from 'src/decorators/current-user.decorator'; // Importa o decorator para obter o user_id
+import { UserId } from 'src/decorators/current-user.decorator';
+import { UserType } from 'generated/prisma';
 
 @Controller('api/land-owners')
+@UseGuards(JwtAuthGuard)
 export class LandOwnerController {
   constructor(private landOwnerService: LandOwnerService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createLandOwnerDto: CreateLandOwnerDto,
     @UserId() userId: string,
   ) {
     if (!userId) {
-      throw new Error('User ID is required to create a land owner');
+      throw new BadRequestException(
+        'User ID is required to create a land owner',
+      );
     }
     return this.landOwnerService.create(createLandOwnerDto, userId);
+  }
+
+  @Get('my-lands')
+  async getMyLands(@UserId() userId: string, @Req() request: Request) {
+    const userFromRequest = request['user'] as { type?: string } | undefined;
+    const userType: string | undefined = userFromRequest?.type;
+
+    if (userType !== UserType.land_owner) {
+      throw new BadRequestException(
+        'Only land owners can access this endpoint.',
+      );
+    }
+    return this.landOwnerService.findLandsByOwnerId(userId);
   }
 
   @Get()
