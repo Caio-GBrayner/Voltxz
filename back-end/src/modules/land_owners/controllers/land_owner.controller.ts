@@ -41,6 +41,36 @@ export class LandOwnerController {
     return this.landOwnerService.create(createLandOwnerDto, userId);
   }
 
+  @Get('me')
+  async getMyProfile(
+    @UserId() userId: string,
+    @UserTypeDecorator() userType: string,
+  ) {
+    if (userType !== UserType.land_owner) {
+      throw new BadRequestException(
+        'Only land owners can access this endpoint.',
+      );
+    }
+    return this.landOwnerService.getLandOwnerProfileByUserId(userId);
+  }
+
+  // @Patch('me')
+  // async updateMyProfile(
+  //   @Body() updateLandOwnerDto: UpdateLandOwnerDto,
+  //   @UserId() userId: string,
+  //   @UserTypeDecorator() userType: string,
+  // ) {
+  //   if (userType !== UserType.land_owner) {
+  //     throw new BadRequestException(
+  //       'Only land owners can update their profile.',
+  //     );
+  //   }
+  //   return this.landOwnerService.updateLandOwnerProfileByUserId(
+  //     userId,
+  //     updateLandOwnerDto,
+  //   );
+  // }
+
   @Get('my-lands')
   async getMyLands(@UserId() userId: string, @Req() request: Request) {
     const userFromRequest = request['user'] as { type?: string } | undefined;
