@@ -16,11 +16,17 @@ import { UpdateLandOwnerDto } from '../dto/update-land_owner';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/current-user.decorator';
 import { UserType } from 'generated/prisma';
-
+import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service';
+import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
+import { InvestmentService } from 'src/modules/investments/services/investment.service';
 @Controller('api/land-owners')
 @UseGuards(JwtAuthGuard)
 export class LandOwnerController {
-  constructor(private landOwnerService: LandOwnerService) {}
+  constructor(
+    private landOwnerService: LandOwnerService,
+    private projectProposalService: ProjectProposalService,
+    private investmentService: InvestmentService,
+  ) {}
 
   @Post()
   async create(
@@ -46,6 +52,32 @@ export class LandOwnerController {
       );
     }
     return this.landOwnerService.findLandsByOwnerId(userId);
+  }
+
+  @Get('my-project-proposals')
+  async getMyProjectProposals(
+    @UserId() userId: string,
+    @UserTypeDecorator() userType: string,
+  ) {
+    if (userType !== UserType.land_owner) {
+      throw new BadRequestException(
+        'Only land owners can access this endpoint.',
+      );
+    }
+    return this.projectProposalService.findProposalsByLandOwnerUserId(userId);
+  }
+
+  @Get('my-investments')
+  async getMyInvestments(
+    @UserId() userId: string,
+    @UserTypeDecorator() userType: string,
+  ) {
+    if (userType !== UserType.land_owner) {
+      throw new BadRequestException(
+        'Only land owners can access this endpoint.',
+      );
+    }
+    return this.investmentService.findInvestmentsByLandOwnerUserId(userId);
   }
 
   @Get()

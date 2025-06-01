@@ -131,4 +131,43 @@ export class ProjectProposalService {
   async remove(id: string) {
     return this.prisma.projectProposal.delete({ where: { id } });
   }
+
+  async findProposalsByLandOwnerUserId(userId: string) {
+    const landOwner = await this.prisma.landOwners.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!landOwner) {
+      throw new NotFoundException(
+        'Land Owner profile not found for this user.',
+      );
+    }
+
+    const lands = await this.prisma.lands.findMany({
+      where: {
+        owner_id: landOwner.id,
+      },
+      select: { id: true },
+    });
+
+    if (lands.length === 0) {
+      throw new NotFoundException('No lands found for this land owner.');
+    }
+    const landIds = lands.map((land) => land.id);
+
+    return this.prisma.projectProposal.findMany({
+      where: {
+        land: {
+          id: {
+            in: landIds,
+          },
+        },
+      },
+      include: {
+        project: true,
+        land: true,
+      },
+    });
+  }
 }

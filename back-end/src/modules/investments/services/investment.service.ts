@@ -76,6 +76,83 @@ export class InvestmentService {
     });
   }
 
+  async findInvestmentsByLandOwnerUserId(userId: string) {
+    const landOwner = await this.prisma.landOwners.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!landOwner) {
+      throw new NotFoundException(
+        'Land Owner profile not found for this user.',
+      );
+    }
+
+    const lands = await this.prisma.lands.findMany({
+      where: {
+        owner_id: landOwner.id,
+      },
+      select: { id: true },
+    });
+
+    if (lands.length === 0) {
+      return [];
+    }
+
+    const landIds = lands.map((land) => land.id);
+
+    const projects = await this.prisma.projects.findMany({
+      where: {
+        land_id: {
+          in: landIds,
+        },
+      },
+      select: { id: true },
+    });
+
+    if (projects.length === 0) {
+      return [];
+    }
+
+    const projectIds = projects.map((project) => project.id);
+
+    return this.prisma.investments.findMany({
+      where: {
+        project_id: {
+          in: projectIds,
+        },
+      },
+      include: {
+        project: {
+          select: {
+            title: true,
+            power_kw: true,
+            cost: true,
+            land: {
+              select: {
+                state: true,
+                city: true,
+              },
+            },
+          },
+        },
+        investor: {
+          select: {
+            user: {
+              select: {
+                email: true,
+                phone: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        invested_date: 'desc',
+      },
+    });
+  }
+
   async findOne(id: string) {
     const investment = await this.prisma.investments.findUnique({
       where: { id },
