@@ -50,6 +50,62 @@ export class ProjectService {
     return newProject;
   }
 
+  async findProjectsByCompanyUserId(userId: string) {
+    const company = await this.prisma.companies.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!company) {
+      throw new NotFoundException('Company profile not found for this user.');
+    }
+
+    return this.prisma.projects.findMany({
+      where: {
+        company_id: company.id,
+      },
+      include: {
+        land: {
+          select: {
+            city: true,
+            state: true,
+            postal_code: true,
+            country: true,
+            owner: {
+              select: {
+                user: {
+                  select: {
+                    name: true,
+                    email: true,
+                    phone: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        Investments: {
+          select: {
+            id: true,
+            value_invested: true,
+            status: true,
+            title: true,
+          },
+        },
+        ProjectProposal: {
+          select: {
+            id: true,
+            status: true,
+            owner_agreed: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
+  }
+
   async findAll() {
     return await this.prisma.projects.findMany();
   }

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCompanyDto } from 'src/modules/companies/dto/create-company.dto';
 import { UpdateCompanyDto } from 'src/modules/companies/dto/update-company.dto';
+// import { User } from 'generated/prisma';
 
 @Injectable()
 export class CompanyService {
@@ -21,6 +22,56 @@ export class CompanyService {
       },
     });
   }
+
+  async getCompanyProfileByUserId(userId: string) {
+    const company = await this.prisma.companies.findUnique({
+      where: { user_id: userId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            user_type: true,
+          },
+        },
+      },
+    });
+    if (!company) {
+      throw new NotFoundException('Company profile not found for this user.');
+    }
+    return company;
+  }
+
+  // async updateCompanyProfileByUserId(
+  //   userId: string,
+  //   updateCompanyDto: UpdateCompanyDto,
+  //   user: User,
+  // ) {
+  //   const company = await this.prisma.companies.findUnique({
+  //     where: { user_id: userId },
+  //   });
+
+  //   if (!company) {
+  //     throw new NotFoundException('Company profile not found.');
+  //   }
+
+  //   return this.prisma.companies.update({
+  //     where: { id: company.id },
+  //     data: {
+  //       company_name: updateCompanyDto.company_name,
+  //       document_id: updateCompanyDto.document_id,
+  //       user: {
+  //         update: {
+  //           name: user.name,
+  //           email: user.email,
+  //           phone: user.phone,
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
 
   async findAll() {
     return this.prisma.companies.findMany();
