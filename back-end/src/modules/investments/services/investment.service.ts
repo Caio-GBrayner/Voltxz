@@ -224,7 +224,10 @@ export class InvestmentService {
     });
   }
 
-  async findInvestmentsByInvestorUserId(userId: string) {
+  async findInvestmentsByInvestorUserId(
+    userId: string,
+    status: InvestmentStatus | undefined,
+  ) {
     const investor = await this.prisma.investors.findUnique({
       where: { user_id: userId },
       select: { id: true },
@@ -237,6 +240,7 @@ export class InvestmentService {
     return this.prisma.investments.findMany({
       where: {
         investor_id: investor.id,
+        status: status ? status : undefined,
       },
       include: {
         project: {

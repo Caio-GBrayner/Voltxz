@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { InvestorService } from '../services/investor.service';
@@ -16,6 +17,7 @@ import { UserId } from 'src/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
 import { UserType } from 'generated/prisma';
+import { InvestmentStatus } from 'generated/prisma';
 import { InvestmentService } from 'src/modules/investments/services/investment.service';
 
 @Controller('/api/investors')
@@ -61,11 +63,27 @@ export class InvestorController {
   async getMyInvestments(
     @UserId() userId: string,
     @UserTypeDecorator() userType: string,
+    @Query('status') statusString?: string,
   ) {
     if (userType !== UserType.investor) {
       throw new BadRequestException('Only investors can access this endpoint.');
     }
-    return this.investmentService.findInvestmentsByInvestorUserId(userId);
+
+    let status: InvestmentStatus | undefined;
+    if (statusString) {
+      if (
+        !Object.values(InvestmentStatus).includes(
+          statusString as InvestmentStatus,
+        )
+      ) {
+        throw new BadRequestException('Invalid status provided.');
+      }
+      status = statusString as InvestmentStatus;
+    }
+    return this.investmentService.findInvestmentsByInvestorUserId(
+      userId,
+      status,
+    );
   }
 
   @Get(':id')
