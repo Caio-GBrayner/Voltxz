@@ -76,7 +76,10 @@ export class InvestmentService {
     });
   }
 
-  async findInvestmentsByLandOwnerUserId(userId: string) {
+  async findInvestmentsByLandOwnerUserId(
+    userId: string,
+    status?: InvestmentStatus,
+  ) {
     const landOwner = await this.prisma.landOwners.findUnique({
       where: { user_id: userId },
       select: { id: true },
@@ -121,6 +124,7 @@ export class InvestmentService {
         project_id: {
           in: projectIds,
         },
+        status: status ? status : undefined,
       },
       include: {
         project: {
@@ -153,7 +157,10 @@ export class InvestmentService {
     });
   }
 
-  async findInvestmentsByCompanyUserId(userId: string) {
+  async findInvestmentsByCompanyUserId(
+    userId: string,
+    status?: InvestmentStatus,
+  ) {
     const company = await this.prisma.companies.findUnique({
       where: { user_id: userId },
       select: { id: true },
@@ -181,6 +188,7 @@ export class InvestmentService {
         project_id: {
           in: projectIds,
         },
+        status: status ? status : undefined,
       },
       include: {
         project: {

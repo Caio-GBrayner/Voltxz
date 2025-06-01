@@ -9,13 +9,14 @@ import {
   UseGuards,
   BadRequestException,
   Req,
+  Query,
 } from '@nestjs/common';
 import { LandOwnerService } from '../services/land_owner.service';
 import { CreateLandOwnerDto } from '../dto/create-land_owner';
 import { UpdateLandOwnerDto } from '../dto/update-land_owner';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/current-user.decorator';
-import { UserType } from 'generated/prisma';
+import { InvestmentStatus, UserType } from 'generated/prisma';
 import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service';
 import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
 import { InvestmentService } from 'src/modules/investments/services/investment.service';
@@ -101,13 +102,29 @@ export class LandOwnerController {
   async getMyInvestments(
     @UserId() userId: string,
     @UserTypeDecorator() userType: string,
+    @Query('status') statusString?: string,
   ) {
     if (userType !== UserType.land_owner) {
       throw new BadRequestException(
         'Only land owners can access this endpoint.',
       );
     }
-    return this.investmentService.findInvestmentsByLandOwnerUserId(userId);
+
+    let status: InvestmentStatus | undefined;
+    if (statusString) {
+      if (
+        !Object.values(InvestmentStatus).includes(
+          statusString as InvestmentStatus,
+        )
+      ) {
+        throw new BadRequestException('Invalid status provided.');
+      }
+      status = statusString as InvestmentStatus;
+    }
+    return this.investmentService.findInvestmentsByLandOwnerUserId(
+      userId,
+      status,
+    );
   }
 
   @Get()

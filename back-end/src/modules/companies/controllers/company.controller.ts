@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CompanyService } from '../services/company.service';
@@ -15,7 +16,7 @@ import { UpdateCompanyDto } from '../dto/update-company.dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/current-user.decorator';
 import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
-import { UserType } from 'generated/prisma';
+import { InvestmentStatus, UserType } from 'generated/prisma';
 import { ProjectService } from 'src/modules/projects/services/projects.service';
 import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service';
 import { InvestmentService } from 'src/modules/investments/services/investment.service';
@@ -92,11 +93,26 @@ export class CompanyController {
   async getMyInvestments(
     @UserId() userId: string,
     @UserTypeDecorator() userType: string,
+    @Query('status') statusString?: string,
   ) {
     if (userType !== UserType.company) {
       throw new BadRequestException('Only companies can access this endpoint.');
     }
-    return this.investmentService.findInvestmentsByCompanyUserId(userId);
+    let status: InvestmentStatus | undefined;
+    if (statusString) {
+      if (
+        !Object.values(InvestmentStatus).includes(
+          statusString as InvestmentStatus,
+        )
+      ) {
+        throw new BadRequestException('Invalid status provided.');
+      }
+      status = statusString as InvestmentStatus;
+    }
+    return this.investmentService.findInvestmentsByCompanyUserId(
+      userId,
+      status,
+    );
   }
 
   @Patch(':id')
