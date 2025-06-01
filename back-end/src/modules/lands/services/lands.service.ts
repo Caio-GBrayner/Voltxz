@@ -51,7 +51,31 @@ export class LandsService {
     });
   }
 
-  findAll() {
-    return this.prisma.lands.findMany();
+  async findAll(page: number = 1, pageSize: number = 10) {
+    const skip = (page - 1) * pageSize;
+    const take = pageSize;
+
+    const [lands, totalItems] = await this.prisma.$transaction([
+      this.prisma.lands.findMany({
+        skip: skip,
+        take: take,
+        orderBy: {
+          created_at: 'desc',
+        },
+      }),
+      this.prisma.lands.count(),
+    ]);
+
+    const totalPages = Math.ceil(totalItems / pageSize);
+
+    return {
+      data: lands,
+      meta: {
+        page: page,
+        pageSize: pageSize,
+        totalItems: totalItems,
+        totalPages: totalPages,
+      },
+    };
   }
 }

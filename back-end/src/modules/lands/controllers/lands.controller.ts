@@ -7,6 +7,10 @@ import {
   Patch,
   Delete,
   UseGuards,
+  DefaultValuePipe,
+  ParseIntPipe,
+  Query,
+  BadRequestException,
 } from '@nestjs/common';
 import { LandsService } from 'src/modules/lands/services/lands.service';
 import { CreateLandDto } from 'src/modules/lands/dto/create-land.dto';
@@ -44,9 +48,19 @@ export class LandsController {
   }
 
   @Get()
-  findAll() {
-    return this.landsService.findAll();
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+  ) {
+    if (page < 1) {
+      throw new BadRequestException('Page must be a positive integer.');
+    }
+    if (pageSize < 1 || pageSize > 100) {
+      throw new BadRequestException('Page size must be between 1 and 100.');
+    }
+    return this.landsService.findAll(page, pageSize);
   }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.landsService.remove(id);

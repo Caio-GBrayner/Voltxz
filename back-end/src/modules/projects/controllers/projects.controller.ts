@@ -7,6 +7,10 @@ import {
   Param,
   Delete,
   UseGuards,
+  DefaultValuePipe,
+  Query,
+  ParseIntPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import { ProjectService } from '../services/projects.service';
 import { CreateProjectDto } from '../dto/create-project.dto';
@@ -28,8 +32,17 @@ export class ProjectsController {
   }
 
   @Get()
-  findAll(): any {
-    return this.projectService.findAll();
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+  ) {
+    if (page < 1) {
+      throw new BadRequestException('Page must be a positive integer.');
+    }
+    if (pageSize < 1 || pageSize > 100) {
+      throw new BadRequestException('Page size must be between 1 and 100.');
+    }
+    return this.projectService.findAll(page, pageSize);
   }
 
   @Get(':id')

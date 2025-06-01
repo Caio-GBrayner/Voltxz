@@ -111,8 +111,32 @@ export class ProjectService {
     });
   }
 
-  async findAll() {
-    return await this.prisma.projects.findMany();
+  async findAll(page: number = 1, pageSize: number = 10) {
+    const skip = (page - 1) * pageSize;
+    const take = pageSize;
+
+    const [projects, totalItems] = await this.prisma.$transaction([
+      this.prisma.projects.findMany({
+        skip: skip,
+        take: take,
+        orderBy: {
+          created_at: 'desc',
+        },
+      }),
+      this.prisma.projects.count(),
+    ]);
+
+    const totalPages = Math.ceil(totalItems / pageSize);
+
+    return {
+      data: projects,
+      meta: {
+        page: page,
+        pageSize: pageSize,
+        totalItems: totalItems,
+        totalPages: totalPages,
+      },
+    };
   }
 
   async findOne(id: string) {
