@@ -132,7 +132,10 @@ export class ProjectProposalService {
     return this.prisma.projectProposal.delete({ where: { id } });
   }
 
-  async findProposalsByLandOwnerUserId(userId: string) {
+  async findProposalsByLandOwnerUserId(
+    userId: string,
+    status?: AgreementStatus,
+  ) {
     const landOwner = await this.prisma.landOwners.findUnique({
       where: { user_id: userId },
       select: { id: true },
@@ -163,6 +166,7 @@ export class ProjectProposalService {
             in: landIds,
           },
         },
+        status: status ? status : undefined,
       },
       include: {
         project: true,
@@ -171,7 +175,7 @@ export class ProjectProposalService {
     });
   }
 
-  async findProposalsByCompanyUserId(userId: string) {
+  async findProposalsByCompanyUserId(userId: string, status?: AgreementStatus) {
     const company = await this.prisma.companies.findUnique({
       where: { user_id: userId },
       select: { id: true },
@@ -199,6 +203,7 @@ export class ProjectProposalService {
         project_id: {
           in: projectIds,
         },
+        status: status ? status : undefined,
       },
       include: {
         land: {

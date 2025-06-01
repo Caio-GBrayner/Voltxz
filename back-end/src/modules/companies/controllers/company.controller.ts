@@ -16,7 +16,7 @@ import { UpdateCompanyDto } from '../dto/update-company.dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/current-user.decorator';
 import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
-import { InvestmentStatus, UserType } from 'generated/prisma';
+import { AgreementStatus, InvestmentStatus, UserType } from 'generated/prisma';
 import { ProjectService } from 'src/modules/projects/services/projects.service';
 import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service';
 import { InvestmentService } from 'src/modules/investments/services/investment.service';
@@ -82,11 +82,28 @@ export class CompanyController {
   async getMyProjectProposals(
     @UserId() userId: string,
     @UserTypeDecorator() userType: string,
+    @Query('status') statusString?: string,
   ) {
     if (userType !== UserType.company) {
       throw new BadRequestException('Only companies can access this endpoint.');
     }
-    return this.projectProposalService.findProposalsByCompanyUserId(userId);
+
+    let status: AgreementStatus | undefined;
+    if (statusString) {
+      if (
+        !Object.values(AgreementStatus).includes(
+          statusString as AgreementStatus,
+        )
+      ) {
+        throw new BadRequestException('Invalid status provided.');
+      }
+      status = statusString as AgreementStatus;
+    }
+
+    return this.projectProposalService.findProposalsByCompanyUserId(
+      userId,
+      status,
+    );
   }
 
   @Get('my-investments')

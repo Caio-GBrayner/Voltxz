@@ -16,7 +16,7 @@ import { CreateLandOwnerDto } from '../dto/create-land_owner';
 import { UpdateLandOwnerDto } from '../dto/update-land_owner';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/current-user.decorator';
-import { InvestmentStatus, UserType } from 'generated/prisma';
+import { AgreementStatus, InvestmentStatus, UserType } from 'generated/prisma';
 import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service';
 import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
 import { InvestmentService } from 'src/modules/investments/services/investment.service';
@@ -89,13 +89,30 @@ export class LandOwnerController {
   async getMyProjectProposals(
     @UserId() userId: string,
     @UserTypeDecorator() userType: string,
+    @Query('status') statusString?: string,
   ) {
     if (userType !== UserType.land_owner) {
       throw new BadRequestException(
         'Only land owners can access this endpoint.',
       );
     }
-    return this.projectProposalService.findProposalsByLandOwnerUserId(userId);
+
+    let status: AgreementStatus | undefined;
+    if (statusString) {
+      if (
+        !Object.values(AgreementStatus).includes(
+          statusString as AgreementStatus,
+        )
+      ) {
+        throw new BadRequestException('Invalid status provided.');
+      }
+      status = statusString as AgreementStatus;
+    }
+
+    return this.projectProposalService.findProposalsByLandOwnerUserId(
+      userId,
+      status,
+    );
   }
 
   @Get('my-investments')
