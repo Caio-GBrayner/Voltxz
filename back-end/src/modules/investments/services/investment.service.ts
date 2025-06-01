@@ -153,6 +153,77 @@ export class InvestmentService {
     });
   }
 
+  async findInvestmentsByCompanyUserId(userId: string) {
+    const company = await this.prisma.companies.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!company) {
+      throw new NotFoundException('Company profile not found for this user.');
+    }
+
+    const projects = await this.prisma.projects.findMany({
+      where: {
+        company_id: company.id,
+      },
+      select: { id: true },
+    });
+
+    if (projects.length === 0) {
+      return [];
+    }
+
+    const projectIds = projects.map((project) => project.id);
+
+    return this.prisma.investments.findMany({
+      where: {
+        project_id: {
+          in: projectIds,
+        },
+      },
+      include: {
+        project: {
+          select: {
+            title: true,
+            power_kw: true,
+            cost: true,
+            land: {
+              select: {
+                city: true,
+                owner: {
+                  select: {
+                    user: {
+                      select: {
+                        name: true,
+                        email: true,
+                        phone: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        investor: {
+          select: {
+            document_id: true,
+            user: {
+              select: {
+                email: true,
+                phone: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        invested_date: 'desc',
+      },
+    });
+  }
+
   async findOne(id: string) {
     const investment = await this.prisma.investments.findUnique({
       where: { id },

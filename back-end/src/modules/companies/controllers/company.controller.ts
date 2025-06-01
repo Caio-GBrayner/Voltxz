@@ -17,6 +17,8 @@ import { UserId } from 'src/decorators/current-user.decorator';
 import { UserType as UserTypeDecorator } from 'src/decorators/user-type.decorator';
 import { UserType } from 'generated/prisma';
 import { ProjectService } from 'src/modules/projects/services/projects.service';
+import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service';
+import { InvestmentService } from 'src/modules/investments/services/investment.service';
 
 @Controller('api/companies')
 @UseGuards(JwtAuthGuard)
@@ -24,6 +26,8 @@ export class CompanyController {
   constructor(
     private readonly companyService: CompanyService,
     private readonly projectService: ProjectService,
+    private readonly projectProposalService: ProjectProposalService,
+    private readonly investmentService: InvestmentService,
   ) {}
 
   @Post()
@@ -71,6 +75,28 @@ export class CompanyController {
       throw new BadRequestException('Only companies can access this endpoint.');
     }
     return this.projectService.findProjectsByCompanyUserId(userId);
+  }
+
+  @Get('my-project-proposals')
+  async getMyProjectProposals(
+    @UserId() userId: string,
+    @UserTypeDecorator() userType: string,
+  ) {
+    if (userType !== UserType.company) {
+      throw new BadRequestException('Only companies can access this endpoint.');
+    }
+    return this.projectProposalService.findProposalsByCompanyUserId(userId);
+  }
+
+  @Get('my-investments')
+  async getMyInvestments(
+    @UserId() userId: string,
+    @UserTypeDecorator() userType: string,
+  ) {
+    if (userType !== UserType.company) {
+      throw new BadRequestException('Only companies can access this endpoint.');
+    }
+    return this.investmentService.findInvestmentsByCompanyUserId(userId);
   }
 
   @Patch(':id')

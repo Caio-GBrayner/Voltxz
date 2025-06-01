@@ -170,4 +170,70 @@ export class ProjectProposalService {
       },
     });
   }
+
+  async findProposalsByCompanyUserId(userId: string) {
+    const company = await this.prisma.companies.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!company) {
+      throw new NotFoundException('Company profile not found for this user.');
+    }
+
+    const projects = await this.prisma.projects.findMany({
+      where: {
+        company_id: company.id,
+      },
+      select: { id: true },
+    });
+
+    if (projects.length === 0) {
+      return [];
+    }
+
+    const projectIds = projects.map((project) => project.id);
+
+    return this.prisma.projectProposal.findMany({
+      where: {
+        project_id: {
+          in: projectIds,
+        },
+      },
+      include: {
+        land: {
+          select: {
+            street: true,
+            number: true,
+            city: true,
+            state: true,
+            owner: {
+              select: {
+                user: {
+                  select: {
+                    name: true,
+                    email: true,
+                    phone: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        project: {
+          select: {
+            title: true,
+            description: true,
+            power_kw: true,
+            cost: true,
+            estimated_return: true,
+            status: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
+  }
 }
