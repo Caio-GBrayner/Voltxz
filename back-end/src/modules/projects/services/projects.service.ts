@@ -8,6 +8,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
 import { ProjectProposalService } from 'src/modules/project_proposal/service/project_proposal.service'; // Ajuste o caminho conforme a localização do seu serviço de proposta
+import { SolarProjectStatus } from 'generated/prisma';
 
 @Injectable()
 export class ProjectService {
@@ -50,7 +51,10 @@ export class ProjectService {
     return newProject;
   }
 
-  async findProjectsByCompanyUserId(userId: string) {
+  async findProjectsByCompanyUserId(
+    userId: string,
+    status: SolarProjectStatus | undefined,
+  ) {
     const company = await this.prisma.companies.findUnique({
       where: { user_id: userId },
       select: { id: true },
@@ -63,6 +67,7 @@ export class ProjectService {
     return this.prisma.projects.findMany({
       where: {
         company_id: company.id,
+        status: status ? status : undefined,
       },
       include: {
         land: {
