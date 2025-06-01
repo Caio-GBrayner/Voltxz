@@ -224,6 +224,54 @@ export class InvestmentService {
     });
   }
 
+  async findInvestmentsByInvestorUserId(userId: string) {
+    const investor = await this.prisma.investors.findUnique({
+      where: { user_id: userId },
+      select: { id: true },
+    });
+
+    if (!investor) {
+      throw new NotFoundException('Investor profile not found for this user.');
+    }
+
+    return this.prisma.investments.findMany({
+      where: {
+        investor_id: investor.id,
+      },
+      include: {
+        project: {
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            power_kw: true,
+            cost: true,
+            status: true,
+            land: {
+              select: {
+                city: true,
+              },
+            },
+            company: {
+              select: {
+                company_name: true,
+                user: {
+                  select: {
+                    name: true,
+                    email: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        invested_date: 'desc',
+      },
+    });
+  }
+
   async findOne(id: string) {
     const investment = await this.prisma.investments.findUnique({
       where: { id },

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateInvestorDto } from 'src/modules/investors/dto/create-investor.dto';
 import { UpdateInvestorDto } from 'src/modules/investors/dto/update-investor.dto';
@@ -22,6 +22,62 @@ export class InvestorService {
       },
     });
   }
+
+  async getInvestorProfileByUserId(userId: string) {
+    const investor = await this.prisma.investors.findUnique({
+      where: { user_id: userId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            user_type: true,
+          },
+        },
+      },
+    });
+    if (!investor) {
+      throw new NotFoundException('Investor profile not found for this user.');
+    }
+    return investor;
+  }
+
+  // async updateInvestorProfileByUserId(
+  //   userId: string,
+  //   updateInvestorDto: UpdateInvestorDto,
+  // ) {
+  //   const investor = await this.prisma.investors.findUnique({
+  //     where: { user_id: userId },
+  //   });
+
+  //   if (!investor) {
+  //     throw new NotFoundException('Investor profile not found.');
+  //   }
+
+  //   const userDataToUpdate: { name?: string; email?: string; phone?: string } =
+  //     {};
+  //   if (updateInvestorDto.user_name !== undefined) {
+  //     userDataToUpdate.name = updateInvestorDto.user_name;
+  //   }
+  //   if (updateInvestorDto.user_email !== undefined) {
+  //     userDataToUpdate.email = updateInvestorDto.user_email;
+  //   }
+  //   if (updateInvestorDto.user_phone !== undefined) {
+  //     userDataToUpdate.phone = updateInvestorDto.user_phone;
+  //   }
+
+  //   return this.prisma.investors.update({
+  //     where: { id: investor.id },
+  //     data: {
+  //       document_id: updateInvestorDto.document_id,
+  //       user: {
+  //         update: userDataToUpdate,
+  //       },
+  //     },
+  //   });
+  // }
 
   async findAll() {
     return this.prisma.investors.findMany();
