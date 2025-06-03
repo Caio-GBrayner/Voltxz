@@ -28,13 +28,18 @@ export class AuthService {
         name: registerDto.name ?? 'Default Name',
         password: hashedPassword,
       },
+      select: {
+        id: true,
+        email: true,
+        user_type: true,
+        phone: true,
+      },
     });
 
     const payload = {
       sub: user.id,
       email: user.email,
       type: user.user_type,
-      phone: user.phone,
     };
 
     return {
@@ -53,12 +58,16 @@ export class AuthService {
       sub: user.id,
       email: user.email,
       type: user.user_type,
-      phone: user.phone,
     };
 
     return {
       access_token: this.jwtService.sign(payload),
-      user_type: user.user_type,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        user_type: user.user_type,
+      },
     };
   }
 }
