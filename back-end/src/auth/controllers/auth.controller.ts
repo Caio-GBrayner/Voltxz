@@ -10,9 +10,7 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(201)
-  async register(
-    @Body() registerDto: RegisterDto,
-  ): Promise<{ access_token: string }> {
+  async register(@Body() registerDto: RegisterDto): Promise<LoginResponse> {
     return await this.authService.register(registerDto);
   }
 

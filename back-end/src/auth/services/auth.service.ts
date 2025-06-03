@@ -31,6 +31,7 @@ export class AuthService {
       select: {
         id: true,
         email: true,
+        name: true,
         user_type: true,
         phone: true,
       },
@@ -44,6 +45,13 @@ export class AuthService {
 
     return {
       access_token: this.jwtService.sign(payload),
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        user_type: user.user_type,
+        phone: user.phone,
+      },
     };
   }
 

@@ -5,6 +5,6 @@ export interface LoginResponse {
     email: string;
     name: string;
     user_type: string;
-    phone?: string;
+    phone?: string | null;
   };
 }
